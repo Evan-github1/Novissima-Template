@@ -1,0 +1,38 @@
+org.firstinspires.ftc.teamcode.TeamCode-annotation-experimental-1.4.0-0 /Users/exiang/.gradle/caches/8.10.2/transforms/19c7047080d77af185702d4a90dc388f/transformed/annotation-experimental-1.4.0/res
+org.firstinspires.ftc.teamcode.TeamCode-emoji2-1.3.0-1 /Users/exiang/.gradle/caches/8.10.2/transforms/25bef02866350625a8dd0e72004e7ba2/transformed/emoji2-1.3.0/res
+org.firstinspires.ftc.teamcode.TeamCode-apriltag-2.1.0-2 /Users/exiang/.gradle/caches/8.10.2/transforms/35f990ad25e049c8ea07677e87f9536d/transformed/apriltag-2.1.0/res
+org.firstinspires.ftc.teamcode.TeamCode-Inspection-10.1.0-3 /Users/exiang/.gradle/caches/8.10.2/transforms/366e4b816deed161d945842550d94fd6/transformed/Inspection-10.1.0/res
+org.firstinspires.ftc.teamcode.TeamCode-opencv-repackaged-bundled-dylibs-4.10.0-A-4 /Users/exiang/.gradle/caches/8.10.2/transforms/3a3c84148bb3020acbdf19e8c6e29d2f/transformed/opencv-repackaged-bundled-dylibs-4.10.0-A/res
+org.firstinspires.ftc.teamcode.TeamCode-lifecycle-livedata-2.6.2-5 /Users/exiang/.gradle/caches/8.10.2/transforms/3cc8f7a4d958e4eed2c0af26e5f2f980/transformed/lifecycle-livedata-2.6.2/res
+org.firstinspires.ftc.teamcode.TeamCode-dashboard-0.4.16-6 /Users/exiang/.gradle/caches/8.10.2/transforms/41055d85cceac215d8c6d7cc18c8fcfd/transformed/dashboard-0.4.16/res
+org.firstinspires.ftc.teamcode.TeamCode-fragment-1.5.4-7 /Users/exiang/.gradle/caches/8.10.2/transforms/4e144e98e756cb97707d01c93a2240ae/transformed/fragment-1.5.4/res
+org.firstinspires.ftc.teamcode.TeamCode-activity-1.7.0-8 /Users/exiang/.gradle/caches/8.10.2/transforms/5287e5f60ecfc880a53ed1ecfac0da8a/transformed/activity-1.7.0/res
+org.firstinspires.ftc.teamcode.TeamCode-startup-runtime-1.1.1-9 /Users/exiang/.gradle/caches/8.10.2/transforms/583d207fa288eb1cafe51447bf3b5ec0/transformed/startup-runtime-1.1.1/res
+org.firstinspires.ftc.teamcode.TeamCode-core-runtime-2.2.0-10 /Users/exiang/.gradle/caches/8.10.2/transforms/5aa0aa1a5144f4be327e30812b076777/transformed/core-runtime-2.2.0/res
+org.firstinspires.ftc.teamcode.TeamCode-core-1.13.0-11 /Users/exiang/.gradle/caches/8.10.2/transforms/61e3a354427e3e7b38320ad5f8c1bd2b/transformed/core-1.13.0/res
+org.firstinspires.ftc.teamcode.TeamCode-emoji2-views-helper-1.3.0-12 /Users/exiang/.gradle/caches/8.10.2/transforms/672e694b62c71e8152f5df9639be827c/transformed/emoji2-views-helper-1.3.0/res
+org.firstinspires.ftc.teamcode.TeamCode-core-ktx-1.13.0-13 /Users/exiang/.gradle/caches/8.10.2/transforms/68df197537c72ba989f3280a007523c3/transformed/core-ktx-1.13.0/res
+org.firstinspires.ftc.teamcode.TeamCode-Hardware-10.1.0-14 /Users/exiang/.gradle/caches/8.10.2/transforms/6d0e98fe7d9977b2fb14f607a000f209/transformed/Hardware-10.1.0/res
+org.firstinspires.ftc.teamcode.TeamCode-lifecycle-viewmodel-savedstate-2.6.2-15 /Users/exiang/.gradle/caches/8.10.2/transforms/6da245357bb8e24280f490fcdf6cf011/transformed/lifecycle-viewmodel-savedstate-2.6.2/res
+org.firstinspires.ftc.teamcode.TeamCode-appcompat-resources-1.7.0-16 /Users/exiang/.gradle/caches/8.10.2/transforms/781dca6ffb45e25e8cba8a7ede66dd94/transformed/appcompat-resources-1.7.0/res
+org.firstinspires.ftc.teamcode.TeamCode-lifecycle-viewmodel-2.6.2-17 /Users/exiang/.gradle/caches/8.10.2/transforms/848c0f863c5ada99507f53d5c03fbd62/transformed/lifecycle-viewmodel-2.6.2/res
+org.firstinspires.ftc.teamcode.TeamCode-lifecycle-runtime-2.6.2-18 /Users/exiang/.gradle/caches/8.10.2/transforms/876e53ffea94ea31a6f886a28672fc89/transformed/lifecycle-runtime-2.6.2/res
+org.firstinspires.ftc.teamcode.TeamCode-appcompat-1.7.0-19 /Users/exiang/.gradle/caches/8.10.2/transforms/8b2970e7dffeb21401a079a2c65038bb/transformed/appcompat-1.7.0/res
+org.firstinspires.ftc.teamcode.TeamCode-RobotServer-10.1.0-20 /Users/exiang/.gradle/caches/8.10.2/transforms/8f98fa4d87daa90172bb0fb9880e2c84/transformed/RobotServer-10.1.0/res
+org.firstinspires.ftc.teamcode.TeamCode-FtcCommon-10.1.0-21 /Users/exiang/.gradle/caches/8.10.2/transforms/9c110ca6d706665b75f49477f71be099/transformed/FtcCommon-10.1.0/res
+org.firstinspires.ftc.teamcode.TeamCode-lifecycle-process-2.6.2-22 /Users/exiang/.gradle/caches/8.10.2/transforms/9eaaae4c5db775c9a4d7750d5cff750a/transformed/lifecycle-process-2.6.2/res
+org.firstinspires.ftc.teamcode.TeamCode-zxing-android-embedded-4.3.0-23 /Users/exiang/.gradle/caches/8.10.2/transforms/aba4c77a9fa7b5538cf151602f5c6427/transformed/zxing-android-embedded-4.3.0/res
+org.firstinspires.ftc.teamcode.TeamCode-OnBotJava-10.0.0-24 /Users/exiang/.gradle/caches/8.10.2/transforms/c2e81bd659746ffcf078af7c3b970ce7/transformed/OnBotJava-10.0.0/res
+org.firstinspires.ftc.teamcode.TeamCode-savedstate-1.2.1-25 /Users/exiang/.gradle/caches/8.10.2/transforms/d504826858ea67e08559f2f585fd6942/transformed/savedstate-1.2.1/res
+org.firstinspires.ftc.teamcode.TeamCode-profileinstaller-1.3.1-26 /Users/exiang/.gradle/caches/8.10.2/transforms/da2c73a3c98a3fc5ce4fa338f8f07ebb/transformed/profileinstaller-1.3.1/res
+org.firstinspires.ftc.teamcode.TeamCode-RobotCore-10.1.0-27 /Users/exiang/.gradle/caches/8.10.2/transforms/de16a915a3a251a204b7f8b60690036a/transformed/RobotCore-10.1.0/res
+org.firstinspires.ftc.teamcode.TeamCode-Blocks-10.1.0-28 /Users/exiang/.gradle/caches/8.10.2/transforms/eff9cd2acdfc7a3c5974462aedbcb22f/transformed/Blocks-10.1.0/res
+org.firstinspires.ftc.teamcode.TeamCode-lifecycle-livedata-core-2.6.2-29 /Users/exiang/.gradle/caches/8.10.2/transforms/f262fed899f97cbdd9fa3c7b5d2ae82c/transformed/lifecycle-livedata-core-2.6.2/res
+org.firstinspires.ftc.teamcode.TeamCode-debug-30 /Users/exiang/StudioProjects/Novissima Template/FtcRobotController/build/intermediates/packaged_res/debug/packageDebugResources
+org.firstinspires.ftc.teamcode.TeamCode-pngs-31 /Users/exiang/StudioProjects/Novissima Template/TeamCode/build/generated/res/pngs/debug
+org.firstinspires.ftc.teamcode.TeamCode-resValues-32 /Users/exiang/StudioProjects/Novissima Template/TeamCode/build/generated/res/resValues/debug
+org.firstinspires.ftc.teamcode.TeamCode-mergeDebugResources-33 /Users/exiang/StudioProjects/Novissima Template/TeamCode/build/intermediates/incremental/debug/mergeDebugResources/merged.dir
+org.firstinspires.ftc.teamcode.TeamCode-mergeDebugResources-34 /Users/exiang/StudioProjects/Novissima Template/TeamCode/build/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+org.firstinspires.ftc.teamcode.TeamCode-debug-35 /Users/exiang/StudioProjects/Novissima Template/TeamCode/build/intermediates/merged_res/debug/mergeDebugResources
+org.firstinspires.ftc.teamcode.TeamCode-debug-36 /Users/exiang/StudioProjects/Novissima Template/TeamCode/src/debug/res
+org.firstinspires.ftc.teamcode.TeamCode-main-37 /Users/exiang/StudioProjects/Novissima Template/TeamCode/src/main/res
