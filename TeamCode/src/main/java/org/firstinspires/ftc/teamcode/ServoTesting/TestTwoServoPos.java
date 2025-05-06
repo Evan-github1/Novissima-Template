@@ -26,12 +26,11 @@ public class TestTwoServoPos extends LinearOpMode {
 
         reset();
         waitForStart();
-        // LOFS and ROFS
         while(opModeIsActive()) {
             if (servoConfirmed && servoConfirmed2) {
                 if (addButtonDelay()) {
                     if (gamepad2.dpad_left) {
-                        // inc servo pos
+                        // dec servo pos
                         if (onServo1) {
                             servoPos -= incValue;
                         } else {
@@ -39,7 +38,7 @@ public class TestTwoServoPos extends LinearOpMode {
                         }
                         delay = System.currentTimeMillis();
                     } else if (gamepad2.dpad_right) {
-                        // dec servo pos
+                        // inc servo pos
                         if (onServo1) {
                             servoPos += incValue;
                         } else {
@@ -72,7 +71,7 @@ public class TestTwoServoPos extends LinearOpMode {
 
                 // stop pesky floating point error :(
                 servoPos = (double) Math.round(servoPos * 100) / 100;
-                servoPos2 = (double) Math.round(servoPos * 100) / 100;
+                servoPos2 = (double) Math.round(servoPos2 * 100) / 100;
 
                 servo.setPosition(servoPos);
                 servo2.setPosition(servoPos2);
@@ -130,6 +129,8 @@ public class TestTwoServoPos extends LinearOpMode {
                     } else if (gamepad1.y) {
                         onServo1 = !onServo1;
                         delay = System.currentTimeMillis();
+                    } else if (gamepad1.options) {
+                        fetchServo();
                     }
                 }
                 if (onServo1) {
@@ -143,29 +144,30 @@ public class TestTwoServoPos extends LinearOpMode {
                 telemetry.addData("Caps Lock", capsLock);
             }
 
-            // try to fetch servos with current servoName
-            try {
-                servo = hardwareMap.get(Servo.class, servoName);
+            telemetry.update();
+        }
+    }
 
-                telemetry.addData("Success", servoName + " is detected.");
-                servoConfirmed = true;
-            } catch (Exception e) {
-                telemetry.addData("Error", "\"" + servoName + "\"" +
-                        " is not a servo. Please re-check your spelling and/or configuration.");
-                servoConfirmed = false;
-            }
+    private void fetchServo() {
+        // try to fetch servos with current servoName
+        try {
+            servo = hardwareMap.get(Servo.class, servoName);
 
-            try {
-                servo2 = hardwareMap.get(Servo.class, servoName2);
-                telemetry.addData("Success", servoName2 + " is detected.");
-                servoConfirmed2 = true;
-            } catch (Exception e) {
-                telemetry.addData("Error", "\"" + servoName2 + "\"" +
-                        " is not a servo. Please re-check your spelling and/or configuration.");
-                servoConfirmed2 = false;
-            } finally {
-                telemetry.update();
-            }
+            telemetry.addData("Success", servoName + " is detected.");
+            servoConfirmed = true;
+        } catch (Exception e) {
+            telemetry.addData("Error", "\"" + servoName + "\"" +
+                    " is not a servo. Please re-check your spelling and/or configuration.");
+            servoConfirmed = false;
+        }
+        try {
+            servo2 = hardwareMap.get(Servo.class, servoName2);
+            telemetry.addData("Success", servoName2 + " is detected.");
+            servoConfirmed2 = true;
+        } catch (Exception e) {
+            telemetry.addData("Error", "\"" + servoName2 + "\"" +
+                    " is not a servo. Please re-check your spelling and/or configuration.");
+            servoConfirmed2 = false;
         }
     }
 

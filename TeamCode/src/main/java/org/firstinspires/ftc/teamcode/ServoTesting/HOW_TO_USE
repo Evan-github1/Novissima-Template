@@ -15,7 +15,7 @@ I will be discussing the TestServoPos class first:
     (you are able to see in the telemetry)
     2. Press B to confirm the letter you're hovering. Use the up and down DPad to turn on/off caps lock.
     A to delete your character.
-    3. Continue until you spelt out the entire servo name that's listed in the config
+    3. Continue until you spelt out the entire servo name that's listed in the config. Press OPTION to confirm
     4. Switch to gamepad two. Here, you will be able to actually test the servo
     5. Use right and left DPad to increase/decrease the servo position (shown in the telemetry).
     6. Use the up and down DPad to increase/decrease the increment value (shown in the telemetry).

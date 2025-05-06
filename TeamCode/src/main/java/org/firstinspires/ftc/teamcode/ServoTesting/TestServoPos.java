@@ -79,6 +79,8 @@ public class TestServoPos extends LinearOpMode {
                             servoName = servoName.substring(0, servoName.length() - 1);
                         } catch (Exception e) {} // swallow exception
                         delay = System.currentTimeMillis();
+                    } else if (gamepad1.options) {
+                        fetchServo();
                     }
                 }
                 telemetry.addData("Current servo name", servoName);
@@ -86,18 +88,20 @@ public class TestServoPos extends LinearOpMode {
                 telemetry.addData("Caps Lock", capsLock);
             }
 
-            // try to fetch servo with current servoName
-            try {
-                servo = hardwareMap.get(Servo.class, servoName);
-                telemetry.addData("Success", servoName + " is detected.");
-                servoConfirmed = true;
-            } catch (Exception e) {
-                telemetry.addData("Error", "\"" + servoName + "\"" +
-                        " is not a servo. Please re-check your spelling and/or configuration.");
-                servoConfirmed = false;
-            } finally {
-                telemetry.update();
-            }
+            telemetry.update();
+        }
+    }
+
+    private void fetchServo() {
+        // try to fetch servo with current servoName
+        try {
+            servo = hardwareMap.get(Servo.class, servoName);
+            telemetry.addData("Success", servoName + " is detected.");
+            servoConfirmed = true;
+        } catch (Exception e) {
+            telemetry.addData("Error", "\"" + servoName + "\"" +
+                    " is not a servo. Please re-check your spelling and/or configuration.");
+            servoConfirmed = false;
         }
     }
 
