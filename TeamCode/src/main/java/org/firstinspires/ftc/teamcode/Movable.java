@@ -6,6 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class Movable extends LinearOpMode {
     static protected DcMotor FLW;
     static protected DcMotor BLW;
@@ -33,37 +36,33 @@ public abstract class Movable extends LinearOpMode {
     }
 
     protected void colorDetection() {
-        HuskyLens.Block[] blocks = huskyLens.blocks();
+        List<HuskyLens.Block> blocks = Arrays.asList(huskyLens.blocks());
 
-        // Check if any colors are detected
-        if (blocks.length > 0) {
-            telemetry.addData("Detected Colors", blocks.length);
-
-            // Loop through each detected color block
-            for (HuskyLens.Block block : blocks) {
-                    /*
-                     red ID = 1
-                     blue ID = 2
-                     yellow ID = 3
-                    */
-                int colorID = block.id;
-                switch (colorID) {
-                    case 1:
-                        telemetry.addData("Red Detected!", "");
-                        break;
-                    case 2:
-                        telemetry.addData("Blue Detected!", "");
-                        break;
-                    case 3:
-                        telemetry.addData("Yellow Detected!", "");
-                        break;
-                }
-                telemetry.addData("Color ID", colorID);
-            }
+        if (!blocks.isEmpty()) {
+            telemetry.addData("Detected Colors", blocks.size());
+            // RAHH JAVA STREAMS OP
+            blocks.stream()
+                .forEach(block -> {
+                /* red ID = 1
+                 blue ID = 2
+                 yellow ID = 3 */
+                    int colorID = block.id;
+                    switch (colorID) {
+                        case 1:
+                            telemetry.addData("Red Detected!", "");
+                            break;
+                        case 2:
+                            telemetry.addData("Blue Detected!", "");
+                            break;
+                        case 3:
+                            telemetry.addData("Yellow Detected!", "");
+                            break;
+                    }
+                    telemetry.addData("Color ID", colorID);
+                });
         } else {
             telemetry.addData("Status", "No Colors Detected");
         }
-
         telemetry.update();
     }
 
