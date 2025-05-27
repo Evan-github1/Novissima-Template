@@ -1,10 +1,9 @@
 package org.firstinspires.ftc.teamcode.RobotFunctions;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-import org.firstinspires.ftc.teamcode.QuickConfig;
-
-public abstract class Movable extends LinearOpMode implements QuickConfig {
+public abstract class Movable extends LinearOpMode {
     static protected DcMotor FLW;
     static protected DcMotor BLW;
     static protected DcMotor FRW;
@@ -13,10 +12,12 @@ public abstract class Movable extends LinearOpMode implements QuickConfig {
     static protected double angle, desVol, vx, vy, v1, v2, max;
     @Override
     public void runOpMode() throws InterruptedException {
-        config(FLW, "FLW");
-        config(BLW, "BLW");
-        config(FRW, "FRW");
-        config(BRW, "BRW");
+        // TODO: NEED "ITS,"
+
+        FLW = hardwareMap.get(DcMotor.class, "FLW");
+        BLW = hardwareMap.get(DcMotor.class, "BLW");
+        FRW = hardwareMap.get(DcMotor.class, "FRW");
+        BRW = hardwareMap.get(DcMotor.class, "BRW");
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -40,6 +41,13 @@ public abstract class Movable extends LinearOpMode implements QuickConfig {
             v1 /= max;
             v2 /= max;
         }
+
+        FLW.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        FLW.setDirection(DcMotor.Direction.FORWARD);
+        BLW.setDirection(DcMotor.Direction.FORWARD);
+        FRW.setDirection(DcMotor.Direction.REVERSE);
+        BRW.setDirection(DcMotor.Direction.REVERSE);
 
         FLW.setPower(v1);
         FRW.setPower(v2);
