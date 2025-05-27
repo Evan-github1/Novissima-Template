@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.RobotFunctions.Movable;
+
 @TeleOp
 public class AnimosityAndMortification extends Movable {
 
@@ -10,13 +12,6 @@ public class AnimosityAndMortification extends Movable {
         while (opModeIsActive()) {
             telemetry.addData("Status", "Running");
             telemetry.update();
-
-            // game loop
-            moveWheels(gamepad1.left_stick_x, gamepad1.left_stick_y);
-
-            if (gamepad1.a) {
-
-            }
         }
     }
 
