@@ -2,23 +2,17 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.dfrobot.HuskyLens;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.RobotFunctions.Axel;
-import org.firstinspires.ftc.teamcode.RobotFunctions.BottomNod;
+import org.firstinspires.ftc.teamcode.RobotFunctions.DoubleSwitchedServo;
+import org.firstinspires.ftc.teamcode.RobotFunctions.LinearSlide;
 import org.firstinspires.ftc.teamcode.RobotFunctions.Movable;
-import org.firstinspires.ftc.teamcode.RobotFunctions.Push;
-import org.firstinspires.ftc.teamcode.RobotFunctions.BottomTwist;
-import org.firstinspires.ftc.teamcode.RobotFunctions.Swing;
-import org.firstinspires.ftc.teamcode.RobotFunctions.TopNod;
+import org.firstinspires.ftc.teamcode.RobotFunctions.TripleSwitchedServo;
 
 @TeleOp
-public class Evan_Polymorphism_Code extends Movable
-        implements Push, BottomTwist, Swing, BottomNod, Axel, TopNod {
-
-    private static long time;
-    private static boolean pushSwitch, twistingBottomSwitch, bottomNodSwitch, axelSwitch, topNodSwitch;
-    private static int swingSwitch;
+public class Evan_Polymorphism_Code extends Movable {
 
     private static Servo LPushServo, RPushServo;
     private static Servo twistingBottomServo;
@@ -27,19 +21,19 @@ public class Evan_Polymorphism_Code extends Movable
     private static Servo axelServo;
     private static Servo topNodServo;
 
+    private static DcMotor LSlide, RSlide;
+
     static protected HuskyLens huskyLens;
 
     static protected ColorSensor colorSensor;
 
-    static {
-        time = System.currentTimeMillis();
-        pushSwitch = false; // retracted
-        twistingBottomSwitch = false; // default pos
-        swingSwitch = 1; // default pos, 0 is back
-        bottomNodSwitch = false; // up
-        axelSwitch = false; // up
-        topNodSwitch = false; // forward
-    }
+    private static DoubleSwitchedServo pushServos;
+    private static DoubleSwitchedServo twistingBottomServos;
+    private static DoubleSwitchedServo swingServos;
+    private static DoubleSwitchedServo bottomNodServos;
+    private static DoubleSwitchedServo axelServos;
+    private static DoubleSwitchedServo topNodServos;
+    private static LinearSlide linearSlide;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -59,9 +53,24 @@ public class Evan_Polymorphism_Code extends Movable
 
         topNodServo = hardwareMap.get(Servo.class, "ORS");
 
+        LSlide = hardwareMap.get(DcMotor.class, "LVLS");
+        RSlide = hardwareMap.get(DcMotor.class, "RVLS");
+
+        pushServos = new DoubleSwitchedServo(LPushServo, RPushServo, 0, 1);
+        twistingBottomServos = new DoubleSwitchedServo(twistingBottomServo, 0, .5);
+        swingServos = new TripleSwitchedServo(LSwingServo, RSwingServo, .55, .2, 0);
+        //swingServos = new DoubleSwitchedServo(LSwingServo, RSwingServo, 0, .2);
+        bottomNodServos = new DoubleSwitchedServo(bottomNodServo, 0, .95);
+        axelServos = new DoubleSwitchedServo(axelServo, .33, .88);
+        topNodServos = new DoubleSwitchedServo(topNodServo, .85, 0);
+
+        linearSlide = new LinearSlide(LSlide, RSlide, 1);
+
         //huskyLens = hardwareMap.get(HuskyLens.class, "huskylens");
         //colorSensor = hardwareMap.get(ColorSensor.class, "colorsensor");
         //huskyLens.selectAlgorithm(HuskyLens.Algorithm.COLOR_RECOGNITION);
+
+        LSwingServo.setDirection(Servo.Direction.FORWARD);
 
         while (opModeIsActive()) {
             telemetry.addData("Status", "Running");
@@ -69,64 +78,30 @@ public class Evan_Polymorphism_Code extends Movable
 
             moveWheels(gamepad1.left_stick_x, gamepad1.left_stick_y);
 
-            if (gamepad1.a && delay()) {
-                if (!pushSwitch) {
-                    extend(LPushServo, RPushServo);
-                } else {
-                    retract(LPushServo, RPushServo);
-                }
-                pushSwitch = !pushSwitch;
-                time = System.currentTimeMillis();
-            } else if (gamepad1.b && delay()) {
-                if (!twistingBottomSwitch) {
-                    defaultPos(twistingBottomServo);
-                } else {
-                    sidePos(twistingBottomServo);
-                }
-                twistingBottomSwitch = !twistingBottomSwitch;
-                time = System.currentTimeMillis();
-            } else if (gamepad1.x && delay()) {
-                if (swingSwitch == 0) {
-                    backPos(LSwingServo, RSwingServo);
-                    swingSwitch++;
-                } else if (swingSwitch == 1) {
-                    defaultPos(LSwingServo, RSwingServo);
-                    swingSwitch++;
-                } else if (swingSwitch == 2) {
-                    frontPos(LSwingServo, RSwingServo);
-                    swingSwitch = 0;
-                }
-                time = System.currentTimeMillis();
-            } else if (gamepad1.y && delay()) {
-                if (!bottomNodSwitch) {
-                    faceUp(bottomNodServo);
-                } else {
-                    faceDown(bottomNodServo);
-                }
-                bottomNodSwitch = !bottomNodSwitch;
-                time = System.currentTimeMillis();
+            if (gamepad1.right_stick_y > .3) {
+                linearSlide.ascend();
+            } else if (gamepad1.right_stick_y < -.3) {
+                linearSlide.descend();
+            } else {
+                linearSlide.disablePower();
             }
 
-            // breakkkkkkkkkkkKKKKKKKK!!KK!K11111!1!11
+            if (gamepad1.a && delay()) {
+                pushServos.quickSwitch();
+            } else if (gamepad1.b && delay()) {
+                twistingBottomServos.quickSwitch();
+            } else if (gamepad1.x && delay()) {
+                swingServos.quickSwitch();
+            } else if (gamepad1.y && delay()) {
+                bottomNodServos.quickSwitch();
+            }
+
 
             if (gamepad2.a && delay()) {
-                if (!axelSwitch) {
-                    up(axelServo);
-                } else {
-                    flat(axelServo);
-                }
-                axelSwitch = !axelSwitch;
-                time = System.currentTimeMillis();
+                axelServos.quickSwitch();
             } else if (gamepad2.b && delay()) {
-                if (!topNodSwitch) {
-                    faceForward(topNodServo);
-                } else {
-                    faceBackward(topNodServo);
-                }
-                topNodSwitch = !topNodSwitch;
-                time = System.currentTimeMillis();
+                topNodServos.quickSwitch();
             }
-
             updatePhoneConsole();
         }
     }
@@ -135,6 +110,8 @@ public class Evan_Polymorphism_Code extends Movable
         return System.currentTimeMillis() - time >= 250;
     }
     public void updatePhoneConsole() {
+        telemetry.addData("LSwing Pos", LSwingServo.getPosition());
+        telemetry.addData("RSwing Pos", RSwingServo.getPosition());
         telemetry.update();
     }
 }

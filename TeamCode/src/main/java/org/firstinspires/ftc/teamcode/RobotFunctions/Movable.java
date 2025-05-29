@@ -8,8 +8,14 @@ public abstract class Movable extends LinearOpMode {
     static protected DcMotor BLW;
     static protected DcMotor FRW;
     static protected DcMotor BRW;
+    static protected long time;
 
     static protected double angle, desVol, vx, vy, v1, v2, max;
+
+    static {
+        time = System.currentTimeMillis();
+    }
+
     @Override
     public void runOpMode() throws InterruptedException {
         // TODO: NEED "ITS,"
