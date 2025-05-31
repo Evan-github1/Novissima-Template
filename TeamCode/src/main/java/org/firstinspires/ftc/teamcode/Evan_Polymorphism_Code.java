@@ -3,11 +3,11 @@ import com.qualcomm.hardware.dfrobot.HuskyLens;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.RobotFunctions.DoubleSwitchedServo;
 import org.firstinspires.ftc.teamcode.RobotFunctions.LinearSlide;
+import org.firstinspires.ftc.teamcode.RobotFunctions.Macro;
 import org.firstinspires.ftc.teamcode.RobotFunctions.Movable;
 import org.firstinspires.ftc.teamcode.RobotFunctions.TripleSwitchedServo;
 
@@ -20,7 +20,9 @@ public class Evan_Polymorphism_Code extends Movable {
     private static Servo bottomNodServo;
     private static Servo axelServo;
     private static Servo topNodServo;
+    private static Servo topGripServo;
 
+    private static int servoSwitch = 0;
     private static DcMotor LSlide, RSlide;
 
     static protected HuskyLens huskyLens;
@@ -29,11 +31,15 @@ public class Evan_Polymorphism_Code extends Movable {
 
     private static DoubleSwitchedServo pushServos;
     private static DoubleSwitchedServo twistingBottomServos;
-    private static DoubleSwitchedServo swingServos;
+    private static TripleSwitchedServo swingServos;
     private static DoubleSwitchedServo bottomNodServos;
     private static DoubleSwitchedServo axelServos;
     private static DoubleSwitchedServo topNodServos;
+    private static DoubleSwitchedServo topGripServos;
+
     private static LinearSlide linearSlide;
+
+    public static Macro collectSpecimen;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -53,24 +59,59 @@ public class Evan_Polymorphism_Code extends Movable {
 
         topNodServo = hardwareMap.get(Servo.class, "ORS");
 
+        topGripServo = hardwareMap.get(Servo.class, "OGS");
+
         LSlide = hardwareMap.get(DcMotor.class, "LVLS");
         RSlide = hardwareMap.get(DcMotor.class, "RVLS");
 
         pushServos = new DoubleSwitchedServo(LPushServo, RPushServo, 0, 1);
         twistingBottomServos = new DoubleSwitchedServo(twistingBottomServo, 0, .5);
-        swingServos = new TripleSwitchedServo(LSwingServo, RSwingServo, .55, .2, 0);
-        //swingServos = new DoubleSwitchedServo(LSwingServo, RSwingServo, 0, .2);
+        swingServos = new TripleSwitchedServo(LSwingServo, RSwingServo, 0, .2, .55) {
+            @Override
+            public void primaryPos() {
+                servo1.setPosition(pos1);
+                if (servo2 != null) {
+                    servo2.setPosition(pos1);
+                }
+            }
+
+            @Override
+            public void secondaryPos() {
+                servo1.setPosition(pos2);
+                if (servo2 != null) {
+                    servo2.setPosition(pos2);
+                }
+            }
+
+            @Override
+            public void tertiaryPos() {
+                servo1.setPosition(pos3);
+                if (servo2 != null) {
+                    servo2.setPosition(pos3);
+                }
+            }
+        };
         bottomNodServos = new DoubleSwitchedServo(bottomNodServo, 0, .95);
         axelServos = new DoubleSwitchedServo(axelServo, .33, .88);
         topNodServos = new DoubleSwitchedServo(topNodServo, .85, 0);
+        topGripServos = new DoubleSwitchedServo(topGripServo, .35, .63);
 
         linearSlide = new LinearSlide(LSlide, RSlide, 1);
+
+        collectSpecimen = () -> {
+            topNodServos.secondaryPos();
+            sleep(500);
+            topGripServos.secondaryPos();
+            sleep(500);
+            topNodServos.primaryPos();
+            sleep(500);
+            swingServos.tertiaryPos();
+        };
 
         //huskyLens = hardwareMap.get(HuskyLens.class, "huskylens");
         //colorSensor = hardwareMap.get(ColorSensor.class, "colorsensor");
         //huskyLens.selectAlgorithm(HuskyLens.Algorithm.COLOR_RECOGNITION);
 
-        LSwingServo.setDirection(Servo.Direction.FORWARD);
 
         while (opModeIsActive()) {
             telemetry.addData("Status", "Running");
@@ -86,20 +127,13 @@ public class Evan_Polymorphism_Code extends Movable {
                 linearSlide.disablePower();
             }
 
-            if (gamepad1.a && delay()) {
-                pushServos.quickSwitch();
-            } else if (gamepad1.b && delay()) {
-                twistingBottomServos.quickSwitch();
-            } else if (gamepad1.x && delay()) {
+            if (gamepad1.b && delay()) {
                 swingServos.quickSwitch();
+            } else if (gamepad1.a && delay()) {
+                topGripServos.quickSwitch();
+            } else if (gamepad1.x && delay()) {
+                collectSpecimen.activate();
             } else if (gamepad1.y && delay()) {
-                bottomNodServos.quickSwitch();
-            }
-
-
-            if (gamepad2.a && delay()) {
-                axelServos.quickSwitch();
-            } else if (gamepad2.b && delay()) {
                 topNodServos.quickSwitch();
             }
             updatePhoneConsole();
@@ -110,8 +144,6 @@ public class Evan_Polymorphism_Code extends Movable {
         return System.currentTimeMillis() - time >= 250;
     }
     public void updatePhoneConsole() {
-        telemetry.addData("LSwing Pos", LSwingServo.getPosition());
-        telemetry.addData("RSwing Pos", RSwingServo.getPosition());
         telemetry.update();
     }
 }
