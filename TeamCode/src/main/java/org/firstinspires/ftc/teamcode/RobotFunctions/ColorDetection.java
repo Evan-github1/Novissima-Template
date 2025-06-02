@@ -5,6 +5,7 @@ import com.qualcomm.hardware.dfrobot.HuskyLens;
 import java.util.Arrays;
 import java.util.List;
 
+// TODO: implement this interface to be able to access color detection (HUSKYLENS, NOT LIMELIGHT)
 public interface ColorDetection {
 
     void redDetected();
@@ -16,7 +17,7 @@ public interface ColorDetection {
 
         if (!blocks.isEmpty()) {
             telemetry.addData("Detected Colors", blocks.size());
-            // RAHH JAVA STREAMS OP
+            // RAHH JAVA STREAMS
             blocks.stream()
                     .forEach(block -> {
                 /* red ID = 1

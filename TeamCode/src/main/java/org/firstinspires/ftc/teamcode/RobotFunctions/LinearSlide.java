@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.RobotFunctions;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+// TODO: exactly what the class name sounds like, might create a class just for general motors
+
 public class LinearSlide {
     private DcMotor LMotor, RMotor;
     private double speed;

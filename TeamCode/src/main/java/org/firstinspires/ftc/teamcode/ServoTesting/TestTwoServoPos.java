@@ -20,6 +20,8 @@ public class TestTwoServoPos extends LinearOpMode {
 
     static private long delay;
 
+    // TODO: READ "HOW_TO_USE" BEFORE USING!
+
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();

@@ -3,6 +3,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+// TODO: inherit this class to be able to drive
 public abstract class Movable extends LinearOpMode {
     static protected DcMotor FLW;
     static protected DcMotor BLW;
@@ -18,8 +19,6 @@ public abstract class Movable extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        // TODO: NEED "ITS,"
-
         FLW = hardwareMap.get(DcMotor.class, "FLW");
         BLW = hardwareMap.get(DcMotor.class, "BLW");
         FRW = hardwareMap.get(DcMotor.class, "FRW");
@@ -28,10 +27,10 @@ public abstract class Movable extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        // Wait for the game to start (driver presses PLAY)
         waitForStart();
     }
 
+    // all robots have wheels so this method is a must
     protected void moveWheels(float x, float y) {
         double correctedX = -x;
         angle = Math.atan2(y, correctedX);

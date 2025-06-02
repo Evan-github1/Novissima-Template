@@ -2,6 +2,11 @@ package org.firstinspires.ftc.teamcode.RobotFunctions;
 
 import com.qualcomm.robotcore.hardware.Servo;
 
+/*
+TODO: this class is useful for servos that utilize two positions
+ For example, a claw (open and closed position)
+ */
+
 public class DoubleSwitchedServo {
 
     public boolean servoSwitch = false; // secondary pos

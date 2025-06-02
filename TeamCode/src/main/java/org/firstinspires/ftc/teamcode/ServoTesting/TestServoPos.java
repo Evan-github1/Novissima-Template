@@ -4,6 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
+
+// TODO: READ "HOW_TO_USE" BEFORE USING!
+
 public class TestServoPos extends LinearOpMode {
 
     static private Servo servo;
@@ -18,7 +21,7 @@ public class TestServoPos extends LinearOpMode {
     static private long delay;
 
     public void runOpMode() {
-        telemetry.addData("Status", "Initialized");
+        telemetry.addData("Status",  "Initialized");
         telemetry.update();
 
         reset();

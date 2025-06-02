@@ -67,6 +67,7 @@ public class Evan_Polymorphism_Code extends Movable {
         pushServos = new DoubleSwitchedServo(LPushServo, RPushServo, 0, 1);
         twistingBottomServos = new DoubleSwitchedServo(twistingBottomServo, 0, .5);
         swingServos = new TripleSwitchedServo(LSwingServo, RSwingServo, 0, .2, .55) {
+            // RAHH ANONYMOUS CLASSES (actually useful though)
             @Override
             public void primaryPos() {
                 servo1.setPosition(pos1);
@@ -74,7 +75,6 @@ public class Evan_Polymorphism_Code extends Movable {
                     servo2.setPosition(pos1);
                 }
             }
-
             @Override
             public void secondaryPos() {
                 servo1.setPosition(pos2);
@@ -82,7 +82,6 @@ public class Evan_Polymorphism_Code extends Movable {
                     servo2.setPosition(pos2);
                 }
             }
-
             @Override
             public void tertiaryPos() {
                 servo1.setPosition(pos3);
@@ -111,7 +110,6 @@ public class Evan_Polymorphism_Code extends Movable {
         //huskyLens = hardwareMap.get(HuskyLens.class, "huskylens");
         //colorSensor = hardwareMap.get(ColorSensor.class, "colorsensor");
         //huskyLens.selectAlgorithm(HuskyLens.Algorithm.COLOR_RECOGNITION);
-
 
         while (opModeIsActive()) {
             telemetry.addData("Status", "Running");
