@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 TODO: Same thing as DoubleSwitchedServo class but for 3 positions instead of 2
  No clear examples but can be used in special cases (like Team #2's swing)
  */
-
+ 
 public class TripleSwitchedServo extends DoubleSwitchedServo {
 
     public int servoSwitch = 0;
