@@ -17,18 +17,19 @@ public class DoubleSwitchedServo {
         this.servo1 = servo1;
         this.pos1 = pos1;
         this.pos2 = pos2;
+        setDirections();
     }
     public DoubleSwitchedServo(Servo servo1, Servo servo2, double pos1, double pos2) {
         this.servo1 = servo1;
         this.servo2 = servo2;
         this.pos1 = pos1;
         this.pos2 = pos2;
+        setDirections();
     }
 
     public void primaryPos() {
         servo1.setPosition(pos1);
         if (servo2 != null) {
-            servo2.setDirection(Servo.Direction.REVERSE);
             servo2.setPosition(pos1);
         }
     }
@@ -36,7 +37,6 @@ public class DoubleSwitchedServo {
     public void secondaryPos() {
         servo1.setPosition(pos2);
         if (servo2 != null) {
-            servo2.setDirection(Servo.Direction.REVERSE);
             servo2.setPosition(pos2);
         }
     }
@@ -49,5 +49,13 @@ public class DoubleSwitchedServo {
         }
         servoSwitch = !servoSwitch;
         Movable.time = System.currentTimeMillis();
+    }
+
+    // use anonymous classes to change, these are default
+    public void setDirections() {
+        servo1.setDirection(Servo.Direction.FORWARD);
+        if (servo2 != null) {
+            servo2.setDirection(Servo.Direction.REVERSE);
+        }
     }
 }

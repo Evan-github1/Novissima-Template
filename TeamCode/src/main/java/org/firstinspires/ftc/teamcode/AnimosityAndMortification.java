@@ -15,7 +15,6 @@ public class AnimosityAndMortification extends Movable {
         }
     }
 
-
     public void updatePhoneConsole() {
         telemetry.update();
     }

@@ -26,7 +26,6 @@ public class TripleSwitchedServo extends DoubleSwitchedServo {
     public void tertiaryPos() {
         servo1.setPosition(pos3);
         if (servo2 != null) {
-            servo2.setDirection(Servo.Direction.REVERSE);
             servo2.setPosition(pos3);
         }
     }

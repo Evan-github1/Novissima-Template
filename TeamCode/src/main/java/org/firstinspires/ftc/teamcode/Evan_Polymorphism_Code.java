@@ -69,25 +69,9 @@ public class Evan_Polymorphism_Code extends Movable {
         swingServos = new TripleSwitchedServo(LSwingServo, RSwingServo, 0, .2, .55) {
             // RAHH ANONYMOUS CLASSES (actually useful though)
             @Override
-            public void primaryPos() {
-                servo1.setPosition(pos1);
-                if (servo2 != null) {
-                    servo2.setPosition(pos1);
-                }
-            }
-            @Override
-            public void secondaryPos() {
-                servo1.setPosition(pos2);
-                if (servo2 != null) {
-                    servo2.setPosition(pos2);
-                }
-            }
-            @Override
-            public void tertiaryPos() {
-                servo1.setPosition(pos3);
-                if (servo2 != null) {
-                    servo2.setPosition(pos3);
-                }
+            public void setDirections() {
+                servo1.setDirection(Servo.Direction.FORWARD);
+                servo2.setDirection(Servo.Direction.FORWARD);
             }
         };
         bottomNodServos = new DoubleSwitchedServo(bottomNodServo, 0, .95);
