@@ -17,9 +17,7 @@ public interface ColorDetection {
 
         if (!blocks.isEmpty()) {
             telemetry.addData("Detected Colors", blocks.size());
-            // RAHH JAVA STREAMS
-            blocks.stream()
-                    .forEach(block -> {
+            blocks.forEach(block -> {
                 /* red ID = 1
                  blue ID = 2
                  yellow ID = 3 */
