@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.RobotFunctions.DoubleSwitchedServo;
 import org.firstinspires.ftc.teamcode.RobotFunctions.LinearSlide;
 import org.firstinspires.ftc.teamcode.RobotFunctions.Macro;
+import org.firstinspires.ftc.teamcode.RobotFunctions.MacroManager;
 import org.firstinspires.ftc.teamcode.RobotFunctions.Movable;
 import org.firstinspires.ftc.teamcode.RobotFunctions.TripleSwitchedServo;
 
@@ -39,7 +40,7 @@ public class Evan_Polymorphism_Code extends Movable {
 
     private static LinearSlide linearSlide;
 
-    public static Macro collectSpecimen;
+    //public static Macro collectSpecimen;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -80,16 +81,28 @@ public class Evan_Polymorphism_Code extends Movable {
         topGripServos = new DoubleSwitchedServo(topGripServo, .35, .63);
 
         linearSlide = new LinearSlide(LSlide, RSlide, 1);
-
-        collectSpecimen = () -> {
-            topNodServos.secondaryPos();
-            sleep(500);
-            topGripServos.secondaryPos();
-            sleep(500);
-            topNodServos.primaryPos();
-            sleep(500);
-            swingServos.tertiaryPos();
+        MacroManager collectSpecimen = new MacroManager(gamepad1) {
+            @Override
+            public void defineMacro() {
+                queue.add(() -> topNodServos.secondaryPos());
+                queue.add(() -> sleep(500));
+                queue.add(() -> topGripServos.secondaryPos());
+                queue.add(() -> sleep(500));
+                queue.add(() -> topNodServos.primaryPos());
+                queue.add(() -> sleep(500));
+                queue.add(() -> swingServos.tertiaryPos());
+            }
         };
+
+//        collectSpecimen = () -> {
+//            topNodServos.secondaryPos();
+//            sleep(500);
+//            topGripServos.secondaryPos();
+//            sleep(500);
+//            topNodServos.primaryPos();
+//            sleep(500);
+//            swingServos.tertiaryPos();
+//        };
 
         //huskyLens = hardwareMap.get(HuskyLens.class, "huskylens");
         //colorSensor = hardwareMap.get(ColorSensor.class, "colorsensor");
@@ -113,12 +126,16 @@ public class Evan_Polymorphism_Code extends Movable {
                 swingServos.quickSwitch();
             } else if (gamepad1.a && delay()) {
                 topGripServos.quickSwitch();
-            } else if (gamepad1.x && delay()) {
-                collectSpecimen.activate();
+            } else if (gamepad1.x && delay() && !collectSpecimen.isRunning()) {
+                //collectSpecimen.activate();
+                collectSpecimen.start();
             } else if (gamepad1.y && delay()) {
                 topNodServos.quickSwitch();
             }
             updatePhoneConsole();
+
+            collectSpecimen.runNext();
+
         }
     }
 

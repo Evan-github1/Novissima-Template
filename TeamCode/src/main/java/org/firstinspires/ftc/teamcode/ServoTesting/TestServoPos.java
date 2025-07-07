@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 // TODO: READ "HOW_TO_USE" BEFORE USING!
 
-public class TestServoPos extends LinearOpMode {
+class TestServoPos extends LinearOpMode {
 
     static private Servo servo;
     static private String servoName;
