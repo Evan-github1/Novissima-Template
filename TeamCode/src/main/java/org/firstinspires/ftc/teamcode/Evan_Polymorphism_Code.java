@@ -7,8 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.RobotFunctions.DoubleSwitchedServo;
 import org.firstinspires.ftc.teamcode.RobotFunctions.LinearSlide;
-import org.firstinspires.ftc.teamcode.RobotFunctions.Macro;
-import org.firstinspires.ftc.teamcode.RobotFunctions.MacroManager;
+import org.firstinspires.ftc.teamcode.Macros.MacroManager;
 import org.firstinspires.ftc.teamcode.RobotFunctions.Movable;
 import org.firstinspires.ftc.teamcode.RobotFunctions.TripleSwitchedServo;
 
@@ -81,6 +80,7 @@ public class Evan_Polymorphism_Code extends Movable {
         topGripServos = new DoubleSwitchedServo(topGripServo, .35, .63);
 
         linearSlide = new LinearSlide(LSlide, RSlide, 1);
+
         MacroManager collectSpecimen = new MacroManager(gamepad1) {
             @Override
             public void defineMacro() {

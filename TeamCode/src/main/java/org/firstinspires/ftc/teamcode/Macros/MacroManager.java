@@ -1,11 +1,11 @@
-package org.firstinspires.ftc.teamcode.RobotFunctions;
+package org.firstinspires.ftc.teamcode.Macros;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class MacroManager {
+public abstract class MacroManager {
     protected Queue<Macro> queue = new LinkedList<>();
     private Gamepad gamepad;
     private boolean running = false;
@@ -13,7 +13,6 @@ public class MacroManager {
     public MacroManager(Gamepad gamepad) {
         this.gamepad = gamepad;
     }
-
     public void start() {
         if (!running) {
             queue.clear();
@@ -49,5 +48,5 @@ public class MacroManager {
         }
     }
 
-    public void defineMacro() {} // use anymonous classes to define
+    public abstract void defineMacro();
 }

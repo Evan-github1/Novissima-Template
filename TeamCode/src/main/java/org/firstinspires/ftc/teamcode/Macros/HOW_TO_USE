@@ -1,0 +1,9 @@
+These two classes are designed to optimize making macros for our robot.
+
+To create a new macro:
+    1. Create a new MacroManager object in your TeleOp class with your current gamepad as an argument
+    2. Define the macro using anonymous classes by overriding the defineMacro() method. For every movement,
+    write queue.add(() -> yourMethod());
+    3. Use the .start() method to begin the macro. The macro will stop whenever a player moves the robot again.
+    4. Make sure the running variable is false through the boolean !.isRunning().
+    5. Add the .runNext() method at the bottom of your while(opModeIsActive()) loop.
