@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
-class TestTwoServoPos extends LinearOpMode {
+public class TestTwoServoPos extends LinearOpMode {
 
     static private Servo servo;
     static private Servo servo2;
