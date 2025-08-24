@@ -76,7 +76,7 @@ public class Evan_Polymorphism_Code extends Movable {
         swingServos = new TripleSwitchedServo(LSwingServo, RSwingServo, 0, .2, .55) {
             // RAHH ANONYMOUS CLASSES (actually useful though)
             @Override
-            protected void setDirections() {
+            public void setDirections() {
                 servo1.setDirection(Servo.Direction.FORWARD);
                 servo2.setDirection(Servo.Direction.FORWARD);
             }

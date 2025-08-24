@@ -52,7 +52,7 @@ public class DoubleSwitchedServo {
     }
 
     // use anonymous classes to change, these are default
-    protected void setDirections() {
+    public void setDirections() {
         servo1.setDirection(Servo.Direction.FORWARD);
         if (servo2 != null) {
             servo2.setDirection(Servo.Direction.REVERSE);
