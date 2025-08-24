@@ -5,16 +5,11 @@ import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.Macros.Macro;
 import org.firstinspires.ftc.teamcode.RobotFunctions.DoubleSwitchedServo;
 import org.firstinspires.ftc.teamcode.RobotFunctions.LinearSlide;
-<<<<<<< HEAD
-import org.firstinspires.ftc.teamcode.Macros.MacroManager;
-=======
-import org.firstinspires.ftc.teamcode.RobotFunctions.Macro;
-<<<<<<< HEAD
->>>>>>> parent of b366bf3 (created a class that makes it easy to run macros that are able to be interrupted if the robot moves)
-=======
->>>>>>> parent of b366bf3 (created a class that makes it easy to run macros that are able to be interrupted if the robot moves)
+import org.firstinspires.ftc.teamcode.RobotFunctions.Movable;
+import org.firstinspires.ftc.teamcode.RobotFunctions.TripleSwitchedServo;
 import org.firstinspires.ftc.teamcode.RobotFunctions.Movable;
 import org.firstinspires.ftc.teamcode.RobotFunctions.TripleSwitchedServo;
 
@@ -87,27 +82,8 @@ public class Evan_Polymorphism_Code extends Movable {
         topGripServos = new DoubleSwitchedServo(topGripServo, .35, .63);
 
         linearSlide = new LinearSlide(LSlide, RSlide, 1);
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-        MacroManager collectSpecimen = new MacroManager(gamepad1) {
-            @Override
-            public void defineMacro() {
-                queue.add(() -> topNodServos.secondaryPos());
-                queue.add(() -> sleep(500));
-                queue.add(() -> topGripServos.secondaryPos());
-                queue.add(() -> sleep(500));
-                queue.add(() -> topNodServos.primaryPos());
-                queue.add(() -> sleep(500));
-                queue.add(() -> swingServos.tertiaryPos());
-            }
-        };
-=======
->>>>>>> parent of b366bf3 (created a class that makes it easy to run macros that are able to be interrupted if the robot moves)
-=======
->>>>>>> parent of b366bf3 (created a class that makes it easy to run macros that are able to be interrupted if the robot moves)
-
-        collectSpecimen = () -> {
+        Macro collectSpecimen = () -> {
             topNodServos.secondaryPos();
             sleep(500);
             topGripServos.secondaryPos();
