@@ -11,6 +11,9 @@ import org.firstinspires.ftc.teamcode.RobotFunctions.LinearSlide;
 import org.firstinspires.ftc.teamcode.Macros.MacroManager;
 =======
 import org.firstinspires.ftc.teamcode.RobotFunctions.Macro;
+<<<<<<< HEAD
+>>>>>>> parent of b366bf3 (created a class that makes it easy to run macros that are able to be interrupted if the robot moves)
+=======
 >>>>>>> parent of b366bf3 (created a class that makes it easy to run macros that are able to be interrupted if the robot moves)
 import org.firstinspires.ftc.teamcode.RobotFunctions.Movable;
 import org.firstinspires.ftc.teamcode.RobotFunctions.TripleSwitchedServo;
@@ -85,6 +88,7 @@ public class Evan_Polymorphism_Code extends Movable {
 
         linearSlide = new LinearSlide(LSlide, RSlide, 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         MacroManager collectSpecimen = new MacroManager(gamepad1) {
             @Override
@@ -98,6 +102,8 @@ public class Evan_Polymorphism_Code extends Movable {
                 queue.add(() -> swingServos.tertiaryPos());
             }
         };
+=======
+>>>>>>> parent of b366bf3 (created a class that makes it easy to run macros that are able to be interrupted if the robot moves)
 =======
 >>>>>>> parent of b366bf3 (created a class that makes it easy to run macros that are able to be interrupted if the robot moves)
 
