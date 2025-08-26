@@ -33,10 +33,13 @@ public class DesktopControlClient {
 
         while (true) {
             System.out.println("\n");
-            String input = read.nextLine();
+            String output = read.nextLine();
 
-            out.writeUTF(input);
+            out.writeUTF(output);
             out.flush();
+
+            String input = in.readUTF();
+            System.out.println(input);
         }
     }
 }
