@@ -25,6 +25,7 @@ public class PhoneControlServer extends LinearOpMode {
         waitForStart();
 
         try {
+            // creates the server
             serverSocket = new ServerSocket(1234);
 
             socket = serverSocket.accept();
@@ -37,6 +38,7 @@ public class PhoneControlServer extends LinearOpMode {
         while (opModeIsActive()) {
             telemetry.addData("Connection is running. Client IP is", socket.getInetAddress());
 
+            // reads input from the client
             String input;
             try {
                 input = in.readUTF();
@@ -44,6 +46,7 @@ public class PhoneControlServer extends LinearOpMode {
 
             String[] words = input.trim().split("\\s+");
 
+            // initiate a new robot component (servo, motor)
             if (words[0].equalsIgnoreCase("init")) {
                 try {
                     components.put(words[1], hardwareMap.get(getComponentClass(words[2]), words[1]));
@@ -51,11 +54,13 @@ public class PhoneControlServer extends LinearOpMode {
                 } catch (Exception e) {
                     msg += "Robot part configuration failed. Error message:\n" + e;
                 }
+            // checks all initiated components
             } else if (words[0].equalsIgnoreCase("view") && words[1].equalsIgnoreCase("init")) {
                 for (String name : components.keySet()) {
                     msg += name + " - " + components.get(name);
                     msg += "\n";
                 }
+            // ends the program
             } else if (words[0].equalsIgnoreCase("term")) {
                 try {
                     msg += "Terminating the program!";
@@ -63,12 +68,15 @@ public class PhoneControlServer extends LinearOpMode {
                     serverSocket.close();
                     requestOpModeStop();
                 } catch (IOException e) { throw new RuntimeException(e); }
+            // if the message starts with the name of an initiated component
             } else if (checkComponents(words[0]) != null) {
                 HardwareDevice component = checkComponents(words[0]);
                 try {
+                    // commands for servos
                     if (component instanceof Servo) { // instanceof is used after a bajillion years of neglect :DD
                         Servo servo = (Servo) component; // bruh
                         if (words[1].equalsIgnoreCase("inc")) {
+                            // increase servo position
                             try {
                                 servo.setPosition(servo.getPosition() + Double.parseDouble(words[2]));
                             } catch (NumberFormatException | IndexOutOfBoundsException e2) {
@@ -76,15 +84,18 @@ public class PhoneControlServer extends LinearOpMode {
                             }
                             msg += "Increasing servo position to " + servo.getPosition();
                         } else if (words[1].equalsIgnoreCase("dec")) {
+                            // decrease servo position
                             try {
                                 servo.setPosition(servo.getPosition() - Double.parseDouble(words[2]));
                             } catch (NumberFormatException | IndexOutOfBoundsException e2) {
                                 servo.setPosition(servo.getPosition() - servoBaseD);
                             }
                             msg += "Decreasing servo position to " + servo.getPosition();
+                            // move servo to a custom position
                         } else if (words[1].equalsIgnoreCase("set") && words[2].equalsIgnoreCase("pos")) {
                             servo.setPosition(Double.parseDouble(words[3]));
                             msg += "Setting servo position to " + servo.getPosition();
+                            // change the direction of the servo
                         } else if (words[1].equalsIgnoreCase("change") && words[2].equalsIgnoreCase("direction")) {
                             if (servo.getDirection().equals(Servo.Direction.FORWARD)) {
                                 servo.setDirection(Servo.Direction.REVERSE);
@@ -92,15 +103,19 @@ public class PhoneControlServer extends LinearOpMode {
                                 servo.setDirection(Servo.Direction.FORWARD);
                             }
                             msg += "Setting servo direction to " + servo.getDirection();
+                            // increase/decrease servo increment/decrement base to something else
                         } else if (words[1].equalsIgnoreCase("set") && words[2].equalsIgnoreCase("base")) {
                             servoBaseD = Double.parseDouble(words[3]);
                             msg += "Setting servo base increment/decrement to " + servoBaseD;
                         }
+                    // commands for motors
                     } else if (component instanceof DcMotor) {
-                        DcMotor motor = (DcMotor) component; // bruh
+                        DcMotor motor = (DcMotor) component; // bruh x2
+                        // sets the motor power to a certain number
                         if (words[1].equalsIgnoreCase("set") && words[2].equalsIgnoreCase("power")) {
                             motorBasePower =  Double.parseDouble(words[3]);
                             msg += "Setting motor base power to " + motorBasePower;
+                            // runs the motor
                         } else if (words[1].equalsIgnoreCase("run")) {
                             new Thread(() -> {
                                 motor.setPower(motorBasePower);
@@ -113,8 +128,10 @@ public class PhoneControlServer extends LinearOpMode {
                                 }
                             }).start();
                             msg += "Running motor";
+                            // stops the motor
                         } else if (words[1].equalsIgnoreCase("stop")) {
                             motor.setPower(0);
+                            // changes the direction of the motor
                         } else if (words[1].equalsIgnoreCase("change") && words[2].equalsIgnoreCase("direction")) {
                             if (motor.getDirection().equals(DcMotor.Direction.FORWARD)) {
                                 motor.setDirection(DcMotor.Direction.REVERSE);
@@ -129,6 +146,7 @@ public class PhoneControlServer extends LinearOpMode {
                 }
             }
 
+            // always sends and resets the message to the client
             try {
                 out.writeUTF(msg);
                 out.flush();
@@ -139,6 +157,7 @@ public class PhoneControlServer extends LinearOpMode {
         }
     }
 
+    // finds if a robot component is initiated
     private HardwareDevice checkComponents(String s) {
         for (String name : components.keySet()) {
             if (name.equalsIgnoreCase(s)) {
@@ -148,7 +167,9 @@ public class PhoneControlServer extends LinearOpMode {
         return null; // no components found
     }
 
-    private Class<? extends HardwareDevice> getComponentClass(String name) {
+    // returns a robot component based on string name
+    private Class<? extends HardwareDevice> getComponentClass(String name) { // RAHH WILDCARD
+        // only supports servos and motors so far
         if (name.equalsIgnoreCase("servo")) {
             return Servo.class;
         } else if (name.equalsIgnoreCase("motor") || name.equalsIgnoreCase("dcmotor")) {
