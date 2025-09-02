@@ -4,6 +4,10 @@
         "source": "org.firstinspires.ftc.teamcode.TeamCode-main-37:/xml/teamwebcamcalibrations.xml"
     },
     {
+        "merged": "org.firstinspires.ftc.teamcode.TeamCode-debug-35:/raw_guzzlord_scream.wav.flat",
+        "source": "org.firstinspires.ftc.teamcode.TeamCode-main-37:/raw/guzzlord_scream.wav"
+    },
+    {
         "merged": "org.firstinspires.ftc.teamcode.TeamCode-debug-35:/raw_readme.md.flat",
         "source": "org.firstinspires.ftc.teamcode.TeamCode-main-37:/raw/readme.md"
     }

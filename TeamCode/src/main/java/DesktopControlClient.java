@@ -1,9 +1,9 @@
 /*
     this is not supposed to be in org.firstinspires.ftc.teamcode. DON'T MOVE IT
     it's a regular java class with a regular main method, not an opmode
-    read my doc for more info
+    read my doc for more info: https://docs.google.com/document/d/1bxNabZWSuYS4XG__-KeR-mj_PQDcAdDYHsHEZVNLnCc/edit?tab=t.0
 
-    copy and paste the following into the terminal to run this class:
+    copy and paste the following into the terminal in Android Studio to run this class:
         cd TeamCode/src/main/java
         javac DesktopControlClient.java
         java DesktopControlClient
@@ -19,7 +19,7 @@ public class DesktopControlClient {
     private static DataOutputStream out;
     private static DataInputStream in;
 
-    private static final String PHONE_IP = "";
+    private static final String PHONE_IP = "192.168.43.1";
 
     public static void main(String[] args) throws IOException, UnknownHostException {
         // connect to the phone

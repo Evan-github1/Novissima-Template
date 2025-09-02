@@ -1,5 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
+/*
+    use this with the DesktopControlClient class
+    look at my doc for more info: https://docs.google.com/document/d/1bxNabZWSuYS4XG__-KeR-mj_PQDcAdDYHsHEZVNLnCc/edit?tab=t.0
+ */
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -17,7 +22,7 @@ public class PhoneControlServer extends LinearOpMode {
     private static DataOutputStream out;
     private static DataInputStream in;
     // after a bit of scouring, I think HardwareDevice is the interface that includes servos and motors
-    private static Map<String, HardwareDevice> components = new HashMap<>();
+    private static final Map<String, HardwareDevice> components = new HashMap<>();
     private static String msg = "";
     private static double motorBasePower = .1, servoBaseD = .05;
     public void runOpMode() {
@@ -151,9 +156,10 @@ public class PhoneControlServer extends LinearOpMode {
                 out.writeUTF(msg);
                 out.flush();
             } catch (IOException e) { throw new RuntimeException(e); }
-
-            msg = "";
-            telemetry.update();
+            finally {
+                msg = "";
+                telemetry.update();
+            }
         }
     }
 

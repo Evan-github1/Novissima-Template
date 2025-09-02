@@ -1,3 +1,5 @@
+TODO: Preferably, don't use this anymore. Use DesktopControlClient and PhoneControlServer instead. It's better and faster, and supports motors.
+
 HOW TO USE THE SERVO TESTING CLASSES!
 
 *The TestServoPos class is used for one servo, the TestTwoServoPos is used for two servos.*
