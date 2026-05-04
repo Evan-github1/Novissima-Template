@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.NetworkTesting;
 
 /*
     use this with the DesktopControlClient class
@@ -15,7 +15,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-@TeleOp
+@TeleOp(name = "Network Servo Testing", group = "Testing")
 public class PhoneControlServer extends LinearOpMode {
     private static ServerSocket serverSocket;
     private static Socket socket;
