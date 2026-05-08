@@ -5,12 +5,14 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.RobotFunctions.Toggle;
+
 @TeleOp
 public class LeBotJames extends LinearOpMode {
     private DcMotor FLW, FRW, BLW, BRW, flyWheel;
     private Servo servoR, servoL;
     private double power;
-    private boolean toggleFlyWheel;
+    private Toggle flyWheelToggle;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -36,10 +38,8 @@ public class LeBotJames extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        toggleFlyWheel = false;
+        flyWheelToggle = new Toggle(() -> gamepad1.bWasPressed());
         power = .5;
-
-        long servoTime = Long.MAX_VALUE;
 
         waitForStart();
 
@@ -63,7 +63,10 @@ public class LeBotJames extends LinearOpMode {
                 BRW.setPower(0);
             }
 
-            if (gamepad1.bWasPressed()) toggleFlyWheel = !toggleFlyWheel;
+            flyWheelToggle.toggleIfPressed();
+            flyWheelToggle.thisNotThat(
+                    () -> flyWheel.setPower(power),
+                    () -> flyWheel.setPower(0));
 
             if (gamepad1.aWasPressed()) {
                 new Thread(() -> {
@@ -75,15 +78,10 @@ public class LeBotJames extends LinearOpMode {
                 }).start();
             }
 
-            if (toggleFlyWheel) {
-                flyWheel.setPower(power);
-            } else {
-                flyWheel.setPower(0);
-            }
             if (gamepad1.dpadUpWasPressed()) {
-                power += 0.1;
+                power += 0.05;
             } else if (gamepad1.dpadDownWasPressed()) {
-                power -= 0.1;
+                power -= 0.05;
             }
 
             telemetry.addData("Fly Wheel Power", power);
