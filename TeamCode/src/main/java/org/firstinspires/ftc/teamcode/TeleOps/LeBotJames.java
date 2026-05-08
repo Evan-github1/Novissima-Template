@@ -1,0 +1,93 @@
+package org.firstinspires.ftc.teamcode.TeleOps;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
+
+@TeleOp
+public class LeBotJames extends LinearOpMode {
+    private DcMotor FLW, FRW, BLW, BRW, flyWheel;
+    private Servo servoR, servoL;
+    private double power;
+    private boolean toggleFlyWheel;
+
+    @Override
+    public void runOpMode() throws InterruptedException {
+        FLW = hardwareMap.get(DcMotor.class, "FLW");
+        FRW = hardwareMap.get(DcMotor.class, "FRW");
+        BLW = hardwareMap.get(DcMotor.class, "BLW");
+        BRW = hardwareMap.get(DcMotor.class, "BRW");
+
+        flyWheel = hardwareMap.get(DcMotor.class, "FlywheelMotor");
+        servoR = hardwareMap.get(Servo.class, "servor");
+        servoL = hardwareMap.get(Servo.class, "servol");
+
+        servoR.setDirection(Servo.Direction.FORWARD);
+        servoL.setDirection(Servo.Direction.FORWARD);
+
+        FLW.setDirection(DcMotorSimple.Direction.FORWARD);
+        FRW.setDirection(DcMotorSimple.Direction.REVERSE);
+        BLW.setDirection(DcMotorSimple.Direction.FORWARD);
+        BRW.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        flyWheel.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
+
+        toggleFlyWheel = false;
+        power = .5;
+
+        long servoTime = Long.MAX_VALUE;
+
+        waitForStart();
+
+        while (opModeIsActive()) {
+            telemetry.addLine("Running");
+
+            if (Math.abs(gamepad1.left_stick_y) >= 0.45) {
+                FLW.setPower(gamepad1.left_stick_y);
+                FRW.setPower(gamepad1.left_stick_y);
+                BLW.setPower(gamepad1.left_stick_y);
+                BRW.setPower(gamepad1.left_stick_y);
+            } else if (Math.abs(gamepad1.left_stick_x) >= 0.5 && Math.abs(gamepad1.left_stick_y) <= 0.4) {
+                FLW.setPower(-gamepad1.left_stick_x);
+                FRW.setPower(gamepad1.left_stick_x);
+                BLW.setPower(-gamepad1.left_stick_x);
+                BRW.setPower(gamepad1.left_stick_x);
+            } else {
+                FLW.setPower(0);
+                FRW.setPower(0);
+                BLW.setPower(0);
+                BRW.setPower(0);
+            }
+
+            if (gamepad1.bWasPressed()) toggleFlyWheel = !toggleFlyWheel;
+
+            if (gamepad1.aWasPressed()) {
+                new Thread(() -> {
+                    servoR.setPosition(1);
+                    servoL.setPosition(0);
+                    sleep(750);
+                    servoR.setPosition(0);
+                    servoL.setPosition(1);
+                }).start();
+            }
+
+            if (toggleFlyWheel) {
+                flyWheel.setPower(power);
+            } else {
+                flyWheel.setPower(0);
+            }
+            if (gamepad1.dpadUpWasPressed()) {
+                power += 0.1;
+            } else if (gamepad1.dpadDownWasPressed()) {
+                power -= 0.1;
+            }
+
+            telemetry.addData("Fly Wheel Power", power);
+            telemetry.update();
+        }
+    }
+}

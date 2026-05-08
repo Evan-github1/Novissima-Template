@@ -22,6 +22,7 @@
 
 // The following are defined in vars.js:
 // getPropertyColor
+// setPropertyColor
 // functionColor
 
 function createGamepadDropdown() {
@@ -36,32 +37,78 @@ Blockly.Blocks['gamepad_getProperty'] = {
   init: function() {
     var PROPERTY_CHOICES = [
         ['A', 'A'],
+        ['AWasPressed', 'AWasPressed'],
+        ['AWasReleased', 'AWasReleased'],
         ['AtRest', 'AtRest'],
         ['B', 'B'],
+        ['BWasPressed', 'BWasPressed'],
+        ['BWasReleased', 'BWasReleased'],
         ['Back', 'Back'],
+        ['BackWasPressed', 'BackWasPressed'],
+        ['BackWasReleased', 'BackWasReleased'],
         ['Circle', 'Circle'],
+        ['CircleWasPressed', 'CircleWasPressed'],
+        ['CircleWasReleased', 'CircleWasReleased'],
         ['Cross', 'Cross'],
+        ['CrossWasPressed', 'CrossWasPressed'],
+        ['CrossWasReleased', 'CrossWasReleased'],
         ['DpadDown', 'DpadDown'],
+        ['DpadDownWasPressed', 'DpadDownWasPressed'],
+        ['DpadDownWasReleased', 'DpadDownWasReleased'],
         ['DpadLeft', 'DpadLeft'],
+        ['DpadLeftWasPressed', 'DpadLeftWasPressed'],
+        ['DpadLeftWasReleased', 'DpadLeftWasReleased'],
         ['DpadRight', 'DpadRight'],
+        ['DpadRightWasPressed', 'DpadRightWasPressed'],
+        ['DpadRightWasReleased', 'DpadRightWasReleased'],
         ['DpadUp', 'DpadUp'],
+        ['DpadUpWasPressed', 'DpadUpWasPressed'],
+        ['DpadUpWasReleased', 'DpadUpWasReleased'],
         ['Guide', 'Guide'],
+        ['GuideWasPressed', 'GuideWasPressed'],
+        ['GuideWasReleased', 'GuideWasReleased'],
         ['LeftBumper', 'LeftBumper'],
+        ['LeftBumperWasPressed', 'LeftBumperWasPressed'],
+        ['LeftBumperWasReleased', 'LeftBumperWasReleased'],
         ['LeftStickButton', 'LeftStickButton'],
+        ['LeftStickButtonWasPressed', 'LeftStickButtonWasPressed'],
+        ['LeftStickButtonWasReleased', 'LeftStickButtonWasReleased'],
         ['LeftStickX', 'LeftStickX'],
         ['LeftStickY', 'LeftStickY'],
         ['LeftTrigger', 'LeftTrigger'],
+        ['LeftTriggerPressed', 'LeftTriggerPressed'],
+        ['LeftTriggerWasPressed', 'LeftTriggerWasPressed'],
+        ['LeftTriggerWasReleased', 'LeftTriggerWasReleased'],
         ['Options', 'Options'],
+        ['OptionsWasPressed', 'OptionsWasPressed'],
+        ['OptionsWasReleased', 'OptionsWasReleased'],
         ['PS', 'PS'],
+        ['PSWasPressed', 'PSWasPressed'],
+        ['PSWasReleased', 'PSWasReleased'],
         ['RightBumper', 'RightBumper'],
+        ['RightBumperWasPressed', 'RightBumperWasPressed'],
+        ['RightBumperWasReleased', 'RightBumperWasReleased'],
         ['RightStickButton', 'RightStickButton'],
+        ['RightStickButtonWasPressed', 'RightStickButtonWasPressed'],
+        ['RightStickButtonWasReleased', 'RightStickButtonWasReleased'],
         ['RightStickX', 'RightStickX'],
         ['RightStickY', 'RightStickY'],
         ['RightTrigger', 'RightTrigger'],
+        ['RightTriggerPressed', 'RightTriggerPressed'],
+        ['RightTriggerWasPressed', 'RightTriggerWasPressed'],
+        ['RightTriggerWasReleased', 'RightTriggerWasReleased'],
         ['Share', 'Share'],
+        ['ShareWasPressed', 'ShareWasPressed'],
+        ['ShareWasReleased', 'ShareWasReleased'],
         ['Square', 'Square'],
+        ['SquareWasPressed', 'SquareWasPressed'],
+        ['SquareWasReleased', 'SquareWasReleased'],
         ['Start', 'Start'],
+        ['StartWasPressed', 'StartWasPressed'],
+        ['StartWasReleased', 'StartWasReleased'],
         ['Touchpad', 'Touchpad'],
+        ['TouchpadWasPressed', 'TouchpadWasPressed'],
+        ['TouchpadWasReleased', 'TouchpadWasReleased'],
         ['TouchpadFinger1', 'TouchpadFinger1'],
         ['TouchpadFinger2', 'TouchpadFinger2'],
         ['TouchpadFinger1X', 'TouchpadFinger1X'],
@@ -69,8 +116,15 @@ Blockly.Blocks['gamepad_getProperty'] = {
         ['TouchpadFinger2X', 'TouchpadFinger2X'],
         ['TouchpadFinger2Y', 'TouchpadFinger2Y'],
         ['Triangle', 'Triangle'],
+        ['TriangleWasPressed', 'TriangleWasPressed'],
+        ['TriangleWasReleased', 'TriangleWasReleased'],
+        ['TriggerThreshold', 'TriggerThreshold'],
         ['X', 'X'],
+        ['XWasPressed', 'XWasPressed'],
+        ['XWasReleased', 'XWasReleased'],
         ['Y', 'Y'],
+        ['YWasPressed', 'YWasPressed'],
+        ['YWasReleased', 'YWasReleased'],
     ];
     this.setOutput(true); // no type, for compatibility
     this.appendDummyInput()
@@ -82,41 +136,97 @@ Blockly.Blocks['gamepad_getProperty'] = {
     var thisBlock = this;
     var TOOLTIPS = [
         ['A', 'Returns true if the A button is pressed.'],
+        ['AWasPressed', 'Returns true if the A button was pressed since the last call of this block.'],
+        ['AWasReleased', 'Returns true if the A button was released since the last call of this block.'],
         ['AtRest', 'Returns true if all analog sticks and triggers are in their rest position.'],
         ['B', 'Returns true if the B button is pressed.'],
+        ['BWasPressed', 'Returns true if the B button was pressed since the last call of this block.'],
+        ['BWasReleased', 'Returns true if the B button was released since the last call of this block.'],
         ['Back', 'Returns true if the Back button is pressed.'],
+        ['BackWasPressed', 'Returns true if the Back button was pressed since the last call of this block.'],
+        ['BackWasReleased', 'Returns true if the Back button was released since the last call of this block.'],
         ['Circle', 'Returns true if the Circle button is pressed.'],
+        ['CircleWasPressed', 'Returns true if the Circle button was pressed since the last call of this block.'],
+        ['CircleWasReleased', 'Returns true if the Circle button was released since the last call of this block.'],
         ['Cross', 'Returns true if the Cross button is pressed.'],
+        ['CrossWasPressed', 'Returns true if the Cross button was pressed since the last call of this block.'],
+        ['CrossWasReleased', 'Returns true if the Cross button was released since the last call of this block.'],
         ['DpadDown', 'Returns true if the dpad down button is pressed.'],
+        ['DpadDownWasPressed', 'Returns true if the dpad down button was pressed since the last call of this block.'],
+        ['DpadDownWasReleased', 'Returns true if the dpad down button was released since the last call of this block.'],
         ['DpadLeft', 'Returns true if the dpad left button is pressed.'],
+        ['DpadLeftWasPressed', 'Returns true if the dpad left button was pressed since the last call of this block.'],
+        ['DpadLeftWasReleased', 'Returns true if the dpad left button was released since the last call of this block.'],
         ['DpadRight', 'Returns true if the dpad right button is pressed.'],
+        ['DpadRightWasPressed', 'Returns true if the dpad right button was pressed since the last call of this block.'],
+        ['DpadRightWasReleased', 'Returns true if the dpad right button was released since the last call of this block.'],
         ['DpadUp', 'Returns true if the dpad up button is pressed.'],
-        ['Guide', 'Returns true if the Guide button is pressed. The Guide button is often the large button in the middle of the controller.'],
+        ['DpadUpWasPressed', 'Returns true if the dpad up button was pressed since the last call of this block.'],
+        ['DpadUpWasReleased', 'Returns true if the dpad up button was released since the last call of this block.'],
+        ['Guide', 'Returns true if the Guide button is pressed. ' +
+            'The Guide button is often the large button in the middle of the controller.'],
+        ['GuideWasPressed', 'Returns true if the Guide button was pressed since the last call of this block. ' +
+            'The Guide button is often the large button in the middle of the controller.'],
+        ['GuideWasReleased', 'Returns true if the Guide button was released since the last call of this block. ' +
+            'The Guide button is often the large button in the middle of the controller.'],
         ['LeftBumper', 'Returns true if the left bumper is pressed.'],
+        ['LeftBumperWasPressed', 'Returns true if the left bumper was pressed since the last call of this block.'],
+        ['LeftBumperWasReleased', 'Returns true if the left bumper was released since the last call of this block.'],
         ['LeftStickButton', 'Returns true if the left stick button is pressed.'],
+        ['LeftStickButtonWasPressed', 'Returns true if the left stick button was pressed since the last call of this block.'],
+        ['LeftStickButtonWasReleased', 'Returns true if the left stick button was released since the last call of this block.'],
         ['LeftStickX', 'Returns a numeric value between -1.0 and +1.0 representing the left analog stick horizontal axis value.'],
         ['LeftStickY', 'Returns a numeric value between -1.0 and +1.0 representing the left analog stick vertical axis value.'],
         ['LeftTrigger', 'Returns a numeric value between 0.0 and +1.0 representing the left trigger value.'],
+        ['LeftTriggerPressed', 'Returns true if the left trigger is past the trigger threshold.'],
+        ['LeftTriggerWasPressed', 'Returns true if the left trigger was pressed since the last call of this block.'],
+        ['LeftTriggerWasReleased', 'Returns true if the left trigger was released since the last call of this block.'],
         ['Options', 'Returns true if the Options button is pressed.'],
+        ['OptionsWasPressed', 'Returns true if the Options button was pressed since the last call of this block.'],
+        ['OptionsWasReleased', 'Returns true if the Options button was released since the last call of this block.'],
         ['PS', 'Returns true if the PS button is pressed.'],
+        ['PSWasPressed', 'Returns true if the PS button was pressed since the last call of this block.'],
+        ['PSWasReleased', 'Returns true if the PS button was released since the last call of this block.'],
         ['RightBumper', 'Returns true if the right bumper is pressed.'],
+        ['RightBumperWasPressed', 'Returns true if the right bumper was pressed since the last call of this block.'],
+        ['RightBumperWasReleased', 'Returns true if the right bumper was released since the last call of this block.'],
         ['RightStickButton', 'Returns true if the right stick button is pressed.'],
+        ['RightStickButtonWasPressed', 'Returns true if the right stick button was pressed since the last call of this block.'],
+        ['RightStickButtonWasReleased', 'Returns true if the right stick button was released since the last call of this block.'],
         ['RightStickX', 'Returns a numeric value between -1.0 and +1.0 representing the right analog stick horizontal axis value.'],
         ['RightStickY', 'Returns a numeric value between -1.0 and +1.0 representing the right analog stick vertical axis value .'],
         ['RightTrigger', 'Returns a numeric value between 0.0 and +1.0 representing the right trigger value.'],
+        ['RightTriggerPressed', 'Returns true if the right trigger is past the trigger threshold.'],
+        ['RightTriggerWasPressed', 'Returns true if the right trigger was pressed since the last call of this block.'],
+        ['RightTriggerWasReleased', 'Returns true if the right trigger was released since the last call of this block.'],
         ['Share', 'Returns true if the Share button is pressed.'],
+        ['ShareWasPressed', 'Returns true if the Share button was pressed since the last call of this block.'],
+        ['ShareWasReleased', 'Returns true if the Share button was released since the last call of this block.'],
         ['Square', 'Returns true if the Square button is pressed.'],
+        ['SquareWasPressed', 'Returns true if the Square button was pressed since the last call of this block.'],
+        ['SquareWasReleased', 'Returns true if the Square button was released since the last call of this block.'],
         ['Start', 'Returns true if the Start button is pressed.'],
+        ['StartWasPressed', 'Returns true if the Start button was pressed since the last call of this block.'],
+        ['StartWasReleased', 'Returns true if the Start button was released since the last call of this block.'],
         ['Touchpad', 'Returns true if the Touchpad button is pressed.'],
+        ['TouchpadWasPressed', 'Returns true if the Touchpad button was pressed since the last call of this block.'],
+        ['TouchpadWasReleased', 'Returns true if the Touchpad button was released since the last call of this block.'],
         ['TouchpadFinger1', 'Returns true if the Touchpad is tracking finger ID # 1.'],
         ['TouchpadFinger2', 'Returns true if the Touchpad is tracking finger ID # 2.'],
-        ['TouchpadFinger1X', 'Returns  a numeric value between -1.0 and +1.0 representing the horizontal axis value.'],
-        ['TouchpadFinger1Y', 'Returns  a numeric value between -1.0 and +1.0 representing the vertical axis value.'],
-        ['TouchpadFinger2X', 'Returns  a numeric value between -1.0 and +1.0 representing the horizontal axis value.'],
-        ['TouchpadFinger2Y', 'Returns  a numeric value between -1.0 and +1.0 representing the vertical axis value.'],
+        ['TouchpadFinger1X', 'Returns a numeric value between -1.0 and +1.0 representing the horizontal axis value.'],
+        ['TouchpadFinger1Y', 'Returns a numeric value between -1.0 and +1.0 representing the vertical axis value.'],
+        ['TouchpadFinger2X', 'Returns a numeric value between -1.0 and +1.0 representing the horizontal axis value.'],
+        ['TouchpadFinger2Y', 'Returns a numeric value between -1.0 and +1.0 representing the vertical axis value.'],
         ['Triangle', 'Returns true if the Triangle button is pressed.'],
+        ['TriangleWasPressed', 'Returns true if the Triangle button was pressed since the last call of this block.'],
+        ['TriangleWasReleased', 'Returns true if the Triangle button was released since the last call of this block.'],
+        ['TriggerThreshold', 'Returns the threshold for determining if a trigger is pressed.'],
         ['X', 'Returns true if the X button is pressed.'],
+        ['XWasPressed', 'Returns true if the X button was pressed since the last call of this block.'],
+        ['XWasReleased', 'Returns true if the X button was released since the last call of this block.'],
         ['Y', 'Returns true if the Y button is pressed.'],
+        ['YWasPressed', 'Returns true if the Y button was pressed since the last call of this block.'],
+        ['YWasReleased', 'Returns true if the Y button was released since the last call of this block.'],
     ];
     this.setTooltip(function() {
       var key = thisBlock.getFieldValue('PROP');
@@ -145,41 +255,113 @@ Blockly.FtcJava['gamepad_getProperty'] = function(block) {
     case 'A':
       code = 'a';
       break;
+    case 'AWasPressed':
+      code = 'aWasPressed()';
+      break;
+    case 'AWasReleased':
+      code = 'aWasReleased()';
+      break;
     case 'AtRest':
       code = 'atRest()';
       break;
     case 'B':
       code = 'b';
       break;
+    case 'BWasPressed':
+      code = 'bWasPressed()';
+      break;
+    case 'BWasReleased':
+      code = 'bWasReleased()';
+      break;
     case 'Back':
       code = 'back';
+      break;
+    case 'BackWasPressed':
+      code = 'backWasPressed()';
+      break;
+    case 'BackWasReleased':
+      code = 'backWasReleased()';
       break;
     case 'Circle':
       code = 'circle';
       break;
+    case 'CircleWasPressed':
+      code = 'circleWasPressed()';
+      break;
+    case 'CircleWasReleased':
+      code = 'circleWasReleased()';
+      break;
     case 'Cross':
       code = 'cross';
+      break;
+    case 'CrossWasPressed':
+      code = 'crossWasPressed()';
+      break;
+    case 'CrossWasReleased':
+      code = 'crossWasReleased()';
       break;
     case 'DpadDown':
       code = 'dpad_down';
       break;
+    case 'DpadDownWasPressed':
+      code = 'dpadDownWasPressed()';
+      break;
+    case 'DpadDownWasReleased':
+      code = 'dpadDownWasReleased()';
+      break;
     case 'DpadLeft':
       code = 'dpad_left';
+      break;
+    case 'DpadLeftWasPressed':
+      code = 'dpadLeftWasPressed()';
+      break;
+    case 'DpadLeftWasReleased':
+      code = 'dpadLeftWasReleased()';
       break;
     case 'DpadRight':
       code = 'dpad_right';
       break;
+    case 'DpadRightWasPressed':
+      code = 'dpadRightWasPressed()';
+      break;
+    case 'DpadRightWasReleased':
+      code = 'dpadRightWasReleased()';
+      break;
     case 'DpadUp':
       code = 'dpad_up';
+      break;
+    case 'DpadUpWasPressed':
+      code = 'dpadUpWasPressed()';
+      break;
+    case 'DpadUpWasReleased':
+      code = 'dpadUpWasReleased()';
       break;
     case 'Guide':
       code = 'guide';
       break;
+    case 'GuideWasPressed':
+      code = 'guideWasPressed()';
+      break;
+    case 'GuideWasReleased':
+      code = 'guideWasReleased()';
+      break;
     case 'LeftBumper':
       code = 'left_bumper';
       break;
+    case 'LeftBumperWasPressed':
+      code = 'leftBumperWasPressed()';
+      break;
+    case 'LeftBumperWasReleased':
+      code = 'leftBumperWasReleased()';
+      break;
     case 'LeftStickButton':
       code = 'left_stick_button';
+      break;
+    case 'LeftStickButtonWasPressed':
+      code = 'leftStickButtonWasPressed()';
+      break;
+    case 'LeftStickButtonWasReleased':
+      code = 'leftStickButtonWasReleased()';
       break;
     case 'LeftStickX':
       code = 'left_stick_x';
@@ -190,17 +372,50 @@ Blockly.FtcJava['gamepad_getProperty'] = function(block) {
     case 'LeftTrigger':
       code = 'left_trigger';
       break;
+    case 'LeftTriggerPressed':
+      code = 'left_trigger_pressed';
+      break;
+    case 'LeftTriggerWasPressed':
+      code = 'leftTriggerWasPressed()';
+      break;
+    case 'LeftTriggerWasReleased':
+      code = 'leftTriggerWasReleased()';
+      break;
     case 'Options':
       code = 'options';
+      break;
+    case 'OptionsWasPressed':
+      code = 'optionsWasPressed()';
+      break;
+    case 'OptionsWasReleased':
+      code = 'optionsWasReleased()';
       break;
     case 'PS':
       code = 'ps';
       break;
+    case 'PSWasPressed':
+      code = 'psWasPressed()';
+      break;
+    case 'PSWasReleased':
+      code = 'psWasReleased()';
+      break;
     case 'RightBumper':
       code = 'right_bumper';
       break;
+    case 'RightBumperWasPressed':
+      code = 'rightBumperWasPressed()';
+      break;
+    case 'RightBumperWasReleased':
+      code = 'rightBumperWasReleased()';
+      break;
     case 'RightStickButton':
       code = 'right_stick_button';
+      break;
+    case 'RightStickButtonWasPressed':
+      code = 'rightStickButtonWasPressed()';
+      break;
+    case 'RightStickButtonWasReleased':
+      code = 'rightStickButtonWasReleased()';
       break;
     case 'RightStickX':
       code = 'right_stick_x';
@@ -211,17 +426,50 @@ Blockly.FtcJava['gamepad_getProperty'] = function(block) {
     case 'RightTrigger':
       code = 'right_trigger';
       break;
+    case 'RightTriggerPressed':
+      code = 'right_trigger_pressed';
+      break;
+    case 'RightTriggerWasPressed':
+      code = 'rightTriggerWasPressed()';
+      break;
+    case 'RightTriggerWasReleased':
+      code = 'rightTriggerWasReleased()';
+      break;
     case 'Share':
       code = 'share';
+      break;
+    case 'ShareWasPressed':
+      code = 'shareWasPressed()';
+      break;
+    case 'ShareWasReleased':
+      code = 'shareWasReleased()';
       break;
     case 'Square':
       code = 'square';
       break;
+    case 'SquareWasPressed':
+      code = 'squareWasPressed()';
+      break;
+    case 'SquareWasReleased':
+      code = 'squareWasReleased()';
+      break;
     case 'Start':
       code = 'start';
       break;
+    case 'StartWasPressed':
+      code = 'startWasPressed()';
+      break;
+    case 'StartWasReleased':
+      code = 'startWasReleased()';
+      break;
     case 'Touchpad':
       code = 'touchpad';
+      break;
+    case 'TouchpadWasPressed':
+      code = 'touchpadWasPressed()';
+      break;
+    case 'TouchpadWasReleased':
+      code = 'touchpadWasReleased()';
       break;
     case 'TouchpadFinger1':
       code = 'touchpad_finger_1';
@@ -244,11 +492,32 @@ Blockly.FtcJava['gamepad_getProperty'] = function(block) {
     case 'Triangle':
       code = 'triangle';
       break;
+    case 'TriangleWasPressed':
+      code = 'triangleWasPressed()';
+      break;
+    case 'TriangleWasReleased':
+      code = 'triangleWasReleased()';
+      break;
+    case 'TriggerThreshold':
+      code = 'getTriggerThreshold()';
+      break;
     case 'X':
       code = 'x';
       break;
+    case 'XWasPressed':
+      code = 'xWasPressed()';
+      break;
+    case 'XWasReleased':
+      code = 'xWasReleased()';
+      break;
     case 'Y':
       code = 'y';
+      break;
+    case 'YWasPressed':
+      code = 'yWasPressed()';
+      break;
+    case 'YWasReleased':
+      code = 'yWasReleased()';
       break;
     default:
       throw 'Unexpected property ' + property + ' (gamepad_getProperty).';
@@ -264,31 +533,83 @@ Blockly.Blocks['gamepad_getProperty_Boolean'] = {
   init: function() {
     var PROPERTY_CHOICES = [
         ['A', 'A'],
+        ['AWasPressed', 'AWasPressed'],
+        ['AWasReleased', 'AWasReleased'],
         ['AtRest', 'AtRest'],
         ['B', 'B'],
+        ['BWasPressed', 'BWasPressed'],
+        ['BWasReleased', 'BWasReleased'],
         ['Back', 'Back'],
+        ['BackWasPressed', 'BackWasPressed'],
+        ['BackWasReleased', 'BackWasReleased'],
         ['Circle', 'Circle'],
+        ['CircleWasPressed', 'CircleWasPressed'],
+        ['CircleWasReleased', 'CircleWasReleased'],
         ['Cross', 'Cross'],
+        ['CrossWasPressed', 'CrossWasPressed'],
+        ['CrossWasReleased', 'CrossWasReleased'],
         ['DpadDown', 'DpadDown'],
+        ['DpadDownWasPressed', 'DpadDownWasPressed'],
+        ['DpadDownWasReleased', 'DpadDownWasReleased'],
         ['DpadLeft', 'DpadLeft'],
+        ['DpadLeftWasPressed', 'DpadLeftWasPressed'],
+        ['DpadLeftWasReleased', 'DpadLeftWasReleased'],
         ['DpadRight', 'DpadRight'],
+        ['DpadRightWasPressed', 'DpadRightWasPressed'],
+        ['DpadRightWasReleased', 'DpadRightWasReleased'],
         ['DpadUp', 'DpadUp'],
+        ['DpadUpWasPressed', 'DpadUpWasPressed'],
+        ['DpadUpWasReleased', 'DpadUpWasReleased'],
         ['Guide', 'Guide'],
+        ['GuideWasPressed', 'GuideWasPressed'],
+        ['GuideWasReleased', 'GuideWasReleased'],
         ['LeftBumper', 'LeftBumper'],
+        ['LeftBumperWasPressed', 'LeftBumperWasPressed'],
+        ['LeftBumperWasReleased', 'LeftBumperWasReleased'],
         ['LeftStickButton', 'LeftStickButton'],
+        ['LeftStickButtonWasPressed', 'LeftStickButtonWasPressed'],
+        ['LeftStickButtonWasReleased', 'LeftStickButtonWasReleased'],
+        ['LeftTriggerPressed', 'LeftTriggerPressed'],
+        ['LeftTriggerWasPressed', 'LeftTriggerWasPressed'],
+        ['LeftTriggerWasReleased', 'LeftTriggerWasReleased'],
         ['Options', 'Options'],
+        ['OptionsWasPressed', 'OptionsWasPressed'],
+        ['OptionsWasReleased', 'OptionsWasReleased'],
         ['PS', 'PS'],
+        ['PSWasPressed', 'PSWasPressed'],
+        ['PSWasReleased', 'PSWasReleased'],
         ['RightBumper', 'RightBumper'],
+        ['RightBumperWasPressed', 'RightBumperWasPressed'],
+        ['RightBumperWasReleased', 'RightBumperWasReleased'],
         ['RightStickButton', 'RightStickButton'],
+        ['RightStickButtonWasPressed', 'RightStickButtonWasPressed'],
+        ['RightStickButtonWasReleased', 'RightStickButtonWasReleased'],
+        ['RightTriggerPressed', 'RightTriggerPressed'],
+        ['RightTriggerWasPressed', 'RightTriggerWasPressed'],
+        ['RightTriggerWasReleased', 'RightTriggerWasReleased'],
         ['Share', 'Share'],
+        ['ShareWasPressed', 'ShareWasPressed'],
+        ['ShareWasReleased', 'ShareWasReleased'],
         ['Square', 'Square'],
+        ['SquareWasPressed', 'SquareWasPressed'],
+        ['SquareWasReleased', 'SquareWasReleased'],
         ['Start', 'Start'],
+        ['StartWasPressed', 'StartWasPressed'],
+        ['StartWasReleased', 'StartWasReleased'],
         ['Touchpad', 'Touchpad'],
+        ['TouchpadWasPressed', 'TouchpadWasPressed'],
+        ['TouchpadWasReleased', 'TouchpadWasReleased'],
         ['TouchpadFinger1', 'TouchpadFinger1'],
         ['TouchpadFinger2', 'TouchpadFinger2'],
         ['Triangle', 'Triangle'],
+        ['TriangleWasPressed', 'TriangleWasPressed'],
+        ['TriangleWasReleased', 'TriangleWasReleased'],
         ['X', 'X'],
+        ['XWasPressed', 'XWasPressed'],
+        ['XWasReleased', 'XWasReleased'],
         ['Y', 'Y'],
+        ['YWasPressed', 'YWasPressed'],
+        ['YWasReleased', 'YWasReleased'],
     ];
     this.setOutput(true, 'Boolean');
     this.appendDummyInput()
@@ -300,31 +621,86 @@ Blockly.Blocks['gamepad_getProperty_Boolean'] = {
     var thisBlock = this;
     var TOOLTIPS = [
         ['A', 'Returns true if the A button is pressed.'],
+        ['AWasPressed', 'Returns true if the A button was pressed since the last call of this block.'],
+        ['AWasReleased', 'Returns true if the A button was released since the last call of this block.'],
         ['AtRest', 'Returns true if all analog sticks and triggers are in their rest position.'],
         ['B', 'Returns true if the B button is pressed.'],
+        ['BWasPressed', 'Returns true if the B button was pressed since the last call of this block.'],
+        ['BWasReleased', 'Returns true if the B button was released since the last call of this block.'],
         ['Back', 'Returns true if the Back button is pressed.'],
+        ['BackWasPressed', 'Returns true if the Back button was pressed since the last call of this block.'],
+        ['BackWasReleased', 'Returns true if the Back button was released since the last call of this block.'],
         ['Circle', 'Returns true if the Circle button is pressed.'],
+        ['CircleWasPressed', 'Returns true if the Circle button was pressed since the last call of this block.'],
+        ['CircleWasReleased', 'Returns true if the Circle button was released since the last call of this block.'],
         ['Cross', 'Returns true if the Cross button is pressed.'],
+        ['CrossWasPressed', 'Returns true if the Cross button was pressed since the last call of this block.'],
+        ['CrossWasReleased', 'Returns true if the Cross button was released since the last call of this block.'],
         ['DpadDown', 'Returns true if the dpad down button is pressed.'],
+        ['DpadDownWasPressed', 'Returns true if the dpad down button was pressed since the last call of this block.'],
+        ['DpadDownWasReleased', 'Returns true if the dpad down button was released since the last call of this block.'],
         ['DpadLeft', 'Returns true if the dpad left button is pressed.'],
+        ['DpadLeftWasPressed', 'Returns true if the dpad left button was pressed since the last call of this block.'],
+        ['DpadLeftWasReleased', 'Returns true if the dpad left button was released since the last call of this block.'],
         ['DpadRight', 'Returns true if the dpad right button is pressed.'],
+        ['DpadRightWasPressed', 'Returns true if the dpad right button was pressed since the last call of this block.'],
+        ['DpadRightWasReleased', 'Returns true if the dpad right button was released since the last call of this block.'],
         ['DpadUp', 'Returns true if the dpad up button is pressed.'],
-        ['Guide', 'Returns true if the Guide button is pressed. The Guide button is often the large button in the middle of the controller.'],
+        ['DpadUpWasPressed', 'Returns true if the dpad up button was pressed since the last call of this block.'],
+        ['DpadUpWasReleased', 'Returns true if the dpad up button was released since the last call of this block.'],
+        ['Guide', 'Returns true if the Guide button is pressed. ' +
+            'The Guide button is often the large button in the middle of the controller.'],
+        ['GuideWasPressed', 'Returns true if the Guide button was pressed since the last call of this block. ' +
+            'The Guide button is often the large button in the middle of the controller.'],
+        ['GuideWasReleased', 'Returns true if the Guide button was released since the last call of this block. ' +
+            'The Guide button is often the large button in the middle of the controller.'],
         ['LeftBumper', 'Returns true if the left bumper is pressed.'],
+        ['LeftBumperWasPressed', 'Returns true if the left bumper was pressed since the last call of this block.'],
+        ['LeftBumperWasReleased', 'Returns true if the left bumper was released since the last call of this block.'],
         ['LeftStickButton', 'Returns true if the left stick button is pressed.'],
+        ['LeftStickButtonWasPressed', 'Returns true if the left stick button was pressed since the last call of this block.'],
+        ['LeftStickButtonWasReleased', 'Returns true if the left stick button was released since the last call of this block.'],
+        ['LeftTriggerPressed', 'Returns true if the left trigger is past the trigger threshold.'],
+        ['LeftTriggerWasPressed', 'Returns true if the left trigger was pressed since the last call of this block.'],
+        ['LeftTriggerWasReleased', 'Returns true if the left trigger was released since the last call of this block.'],
         ['Options', 'Returns true if the Options button is pressed.'],
+        ['OptionsWasPressed', 'Returns true if the Options button was pressed since the last call of this block.'],
+        ['OptionsWasReleased', 'Returns true if the Options button was released since the last call of this block.'],
         ['PS', 'Returns true if the PS button is pressed.'],
+        ['PSWasPressed', 'Returns true if the PS button was pressed since the last call of this block.'],
+        ['PSWasReleased', 'Returns true if the PS button was released since the last call of this block.'],
         ['RightBumper', 'Returns true if the right bumper is pressed.'],
+        ['RightBumperWasPressed', 'Returns true if the right bumper was pressed since the last call of this block.'],
+        ['RightBumperWasReleased', 'Returns true if the right bumper was released since the last call of this block.'],
         ['RightStickButton', 'Returns true if the right stick button is pressed.'],
+        ['RightStickButtonWasPressed', 'Returns true if the right stick button was pressed since the last call of this block.'],
+        ['RightStickButtonWasReleased', 'Returns true if the right stick button was released since the last call of this block.'],
+        ['RightTriggerPressed', 'Returns true if the right trigger is past the trigger threshold.'],
+        ['RightTriggerWasPressed', 'Returns true if the right trigger was pressed since the last call of this block.'],
+        ['RightTriggerWasReleased', 'Returns true if the right trigger was released since the last call of this block.'],
         ['Share', 'Returns true if the Share button is pressed.'],
+        ['ShareWasPressed', 'Returns true if the Share button was pressed since the last call of this block.'],
+        ['ShareWasReleased', 'Returns true if the Share button was released since the last call of this block.'],
         ['Square', 'Returns true if the Square button is pressed.'],
+        ['SquareWasPressed', 'Returns true if the Square button was pressed since the last call of this block.'],
+        ['SquareWasReleased', 'Returns true if the Square button was released since the last call of this block.'],
         ['Start', 'Returns true if the Start button is pressed.'],
+        ['StartWasPressed', 'Returns true if the Start button was pressed since the last call of this block.'],
+        ['StartWasReleased', 'Returns true if the Start button was released since the last call of this block.'],
         ['Touchpad', 'Returns true if the Touchpad button is pressed.'],
+        ['TouchpadWasPressed', 'Returns true if the Touchpad button was pressed since the last call of this block.'],
+        ['TouchpadWasReleased', 'Returns true if the Touchpad button was released since the last call of this block.'],
         ['TouchpadFinger1', 'Returns true if the Touchpad is tracking finger ID # 1.'],
         ['TouchpadFinger2', 'Returns true if the Touchpad is tracking finger ID # 2.'],
         ['Triangle', 'Returns true if the Triangle button is pressed.'],
+        ['TriangleWasPressed', 'Returns true if the Triangle button was pressed since the last call of this block.'],
+        ['TriangleWasReleased', 'Returns true if the Triangle button was released since the last call of this block.'],
         ['X', 'Returns true if the X button is pressed.'],
+        ['XWasPressed', 'Returns true if the X button was pressed since the last call of this block.'],
+        ['XWasReleased', 'Returns true if the X button was released since the last call of this block.'],
         ['Y', 'Returns true if the Y button is pressed.'],
+        ['YWasPressed', 'Returns true if the Y button was pressed since the last call of this block.'],
+        ['YWasReleased', 'Returns true if the Y button was released since the last call of this block.'],
     ];
     this.setTooltip(function() {
       var key = thisBlock.getFieldValue('PROP');
@@ -358,6 +734,7 @@ Blockly.Blocks['gamepad_getProperty_Number'] = {
         ['TouchpadFinger1Y', 'TouchpadFinger1Y'],
         ['TouchpadFinger2X', 'TouchpadFinger2X'],
         ['TouchpadFinger2Y', 'TouchpadFinger2Y'],
+        ['TriggerThreshold', 'TriggerThreshold'],
     ];
     this.setOutput(true, 'Number');
     this.appendDummyInput()
@@ -374,10 +751,11 @@ Blockly.Blocks['gamepad_getProperty_Number'] = {
         ['RightStickX', 'Returns a numeric value between -1.0 and +1.0 representing the right analog stick horizontal axis value.'],
         ['RightStickY', 'Returns a numeric value between -1.0 and +1.0 representing the right analog stick vertical axis value .'],
         ['RightTrigger', 'Returns a numeric value between 0.0 and +1.0 representing the right trigger value.'],
-        ['TouchpadFinger1X', 'Returns  a numeric value between -1.0 and +1.0 representing the horizontal axis value.'],
-        ['TouchpadFinger1Y', 'Returns  a numeric value between -1.0 and +1.0 representing the vertical axis value.'],
-        ['TouchpadFinger2X', 'Returns  a numeric value between -1.0 and +1.0 representing the horizontal axis value.'],
-        ['TouchpadFinger2Y', 'Returns  a numeric value between -1.0 and +1.0 representing the vertical axis value.'],
+        ['TouchpadFinger1X', 'Returns a numeric value between -1.0 and +1.0 representing the horizontal axis value.'],
+        ['TouchpadFinger1Y', 'Returns a numeric value between -1.0 and +1.0 representing the vertical axis value.'],
+        ['TouchpadFinger2X', 'Returns a numeric value between -1.0 and +1.0 representing the horizontal axis value.'],
+        ['TouchpadFinger2Y', 'Returns a numeric value between -1.0 and +1.0 representing the vertical axis value.'],
+        ['TriggerThreshold', 'Returns the threshold for determining if a trigger is pressed.'],
     ];
     this.setTooltip(function() {
       var key = thisBlock.getFieldValue('PROP');
@@ -401,6 +779,7 @@ Blockly.Blocks['gamepad_getProperty_Number'] = {
         case 'TouchpadFinger1Y':
         case 'TouchpadFinger2X':
         case 'TouchpadFinger2Y':
+        case 'TriggerThreshold':
           return 'float';
         default:
           throw 'Unexpected property ' + property + ' (gamepad_getProperty_Number getOutputType).';
@@ -414,6 +793,64 @@ Blockly.JavaScript['gamepad_getProperty_Number'] =
 
 Blockly.FtcJava['gamepad_getProperty_Number'] =
     Blockly.FtcJava['gamepad_getProperty'];
+
+Blockly.Blocks['gamepad_setProperty_Number'] = {
+  init: function() {
+    var PROPERTY_CHOICES = [
+        ['TriggerThreshold', 'TriggerThreshold'],
+    ];
+    this.appendValueInput('VALUE').setCheck('Number')
+        .appendField('set')
+        .appendField(createGamepadDropdown(), 'IDENTIFIER')
+        .appendField('.')
+        .appendField(new Blockly.FieldDropdown(PROPERTY_CHOICES), 'PROP')
+        .appendField('to');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(setPropertyColor);
+    // Assign 'this' to a variable for use in the closures below.
+    var thisBlock = this;
+    var TOOLTIPS = [
+        ['TriggerThreshold', 'Sets the threshold for determining if a trigger is pressed.'],
+    ];
+    this.setTooltip(function() {
+      var key = thisBlock.getFieldValue('PROP');
+      for (var i = 0; i < TOOLTIPS.length; i++) {
+        if (TOOLTIPS[i][0] == key) {
+          return TOOLTIPS[i][1];
+        }
+      }
+      return '';
+    });
+    this.getFtcJavaInputType = function(inputName) {
+      if (inputName == 'VALUE') {
+        var property = thisBlock.getFieldValue('PROP');
+        switch (property) {
+          case 'TriggerThreshold':
+            return 'float';
+          default:
+            throw 'Unexpected property ' + property + ' (gamepad_setProperty_Number getArgumentType).';
+        }
+      }
+      return '';
+    };
+  }
+};
+
+Blockly.JavaScript['gamepad_setProperty_Number'] = function(block) {
+  var identifier = block.getFieldValue('IDENTIFIER');
+  var property = block.getFieldValue('PROP');
+  var value = Blockly.JavaScript.valueToCode(
+      block, 'VALUE', Blockly.JavaScript.ORDER_NONE);
+  return identifier + '.set' + property + '(' + value + ');\n';
+};
+
+Blockly.FtcJava['gamepad_setProperty_Number'] = function(block) {
+  var property = block.getFieldValue('PROP');
+  var identifier = Blockly.FtcJava.importDeclareAssign_(block, 'IDENTIFIER', 'DcMotor');
+  var value = Blockly.FtcJava.valueToCode(block, 'VALUE', Blockly.FtcJava.ORDER_NONE);
+  return identifier + '.set' + property + '(' + value + ');\n';
+};
 
 Blockly.Blocks['gamepad_rumble_with1'] = {
   init: function() {
@@ -770,4 +1207,28 @@ Blockly.FtcJava['gamepad_LED_DURATION_CONTINUOUS'] = function(block) {
   var code = 'Gamepad.LED_DURATION_CONTINUOUS';
   Blockly.FtcJava.generateImport_('Gamepad');
   return [code, Blockly.FtcJava.ORDER_MEMBER];
+};
+
+Blockly.Blocks['gamepad_resetEdgeDetection'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('call')
+        .appendField(createGamepadDropdown(), 'IDENTIFIER')
+        .appendField('.')
+        .appendField(createNonEditableField('resetEdgeDetection'));
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(functionColor);
+    this.setTooltip('Clears any remembered presses and releases of buttons.');
+  }
+};
+
+Blockly.JavaScript['gamepad_resetEdgeDetection'] = function(block) {
+  var identifier = block.getFieldValue('IDENTIFIER');
+  return identifier + '.resetEdgeDetection();\n';
+};
+
+Blockly.FtcJava['gamepad_resetEdgeDetection'] = function(block) {
+  var identifier = block.getFieldValue('IDENTIFIER');
+  return identifier + '.resetEdgeDetection();\n';
 };
