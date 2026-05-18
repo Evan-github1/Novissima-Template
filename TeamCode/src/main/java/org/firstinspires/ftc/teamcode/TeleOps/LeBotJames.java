@@ -46,16 +46,16 @@ public class LeBotJames extends LinearOpMode {
         while (opModeIsActive()) {
             telemetry.addLine("Running");
 
-            if (Math.abs(gamepad1.left_stick_y) >= 0.45) {
+            if (gamepad1.left_stick_y != 0) {
                 FLW.setPower(gamepad1.left_stick_y);
                 FRW.setPower(gamepad1.left_stick_y);
                 BLW.setPower(gamepad1.left_stick_y);
                 BRW.setPower(gamepad1.left_stick_y);
-            } else if (Math.abs(gamepad1.left_stick_x) >= 0.5 && Math.abs(gamepad1.left_stick_y) <= 0.4) {
-                FLW.setPower(-gamepad1.left_stick_x);
-                FRW.setPower(gamepad1.left_stick_x);
-                BLW.setPower(-gamepad1.left_stick_x);
-                BRW.setPower(gamepad1.left_stick_x);
+            } else if (gamepad1.right_stick_x != 0) {
+                FLW.setPower(-gamepad1.right_stick_x);
+                FRW.setPower(gamepad1.right_stick_x);
+                BLW.setPower(-gamepad1.right_stick_x);
+                BRW.setPower(gamepad1.right_stick_x);
             } else {
                 FLW.setPower(0);
                 FRW.setPower(0);
