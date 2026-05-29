@@ -1,4 +1,4 @@
-TODO: Preferably, don't use this anymore. Use DesktopControlClient and PhoneControlServer instead. It's better and faster, and supports motors.
+TODO: Preferably, don't use this anymore. Use Clients.DesktopControlClient and PhoneControlServer instead. It's better and faster, and supports motors.
 
 HOW TO USE THE SERVO TESTING CLASSES!
 

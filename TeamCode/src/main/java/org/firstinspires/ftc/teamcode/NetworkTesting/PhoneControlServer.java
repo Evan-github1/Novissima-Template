@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.NetworkTesting;
 
 /*
-    use this with the DesktopControlClient class
+    use this with the Clients.DesktopControlClient class
     look at my doc for more info: https://docs.google.com/document/d/1bxNabZWSuYS4XG__-KeR-mj_PQDcAdDYHsHEZVNLnCc/edit?tab=t.0
  */
 
